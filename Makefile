@@ -6,7 +6,7 @@ default: build run
 
 build:
 	@echo "=> building image.."
-	@docker build -t ${IMAGE_TAG} ${DOCKER_BUILD_ARGS} .
+	@docker build -t ${IMAGE_TAG} --build-arg REPO=${REPO} ${DOCKER_BUILD_ARGS} .
 	@echo "\n=> build OK!"
 	@echo " Image size: `docker images --format '{{.Size}}' ${IMAGE_TAG}`"
 
@@ -22,6 +22,9 @@ start:
 	@echo "\n=> start OK!"
 	@echo " VPP version: `docker exec -it ${CONTAINER_NAME} vppctl show version`"
 	
+exec:
+	@docker exec -it ${CONTAINER_NAME} bash
+
 vppctl:
 	@docker exec -it ${CONTAINER_NAME} vppctl
 
@@ -31,5 +34,5 @@ stop:
 
 .PHONY: default \
 	build rebuild \
-	run start vppctl stop
+	run start exec vppctl stop
 

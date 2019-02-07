@@ -9,6 +9,7 @@ RUN apt-get update \
 ARG REPO=release
  
 RUN curl -s https://packagecloud.io/install/repositories/fdio/${REPO}/script.deb.sh | bash \
+ && apt-cache madison vpp \
  && apt-get update \
  && apt-get install -y vpp vpp-plugins \
  && rm -rf /var/lib/apt/lists/*
