@@ -92,7 +92,7 @@ function die () {
 
     set -x
     set +eu
-    warn "${1:-Unspecified run-time error occurred!}"
+    echo "${1:-Unspecified run-time error occurred!}"
     exit "${2:-1}"
 }
 
