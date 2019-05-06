@@ -16,7 +16,7 @@ function download_ubuntu_artifacts () {
 
 	set -exuo pipefail
 
-	curl -s "${REPO_URL}"/script.deb.sh | sudo bash || {
+	curl -s "${REPO_URL}"/script.deb.sh | sudo -E bash || {
 		die "Packagecloud FD.io repo fetch failed."
 	}
 
@@ -70,7 +70,7 @@ function download_ubuntu_artifacts () {
 	set -x
 
 	if [ "${INSTALL:-true}" = true ]; then
-		sudo apt-get -y install "${artifacts[@]}" || {
+		sudo -E apt-get -y install "${artifacts[@]}" || {
 			die "Install VPP artifacts failed."
 		}
 	else

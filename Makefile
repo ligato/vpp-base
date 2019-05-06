@@ -13,7 +13,7 @@ default: build
 
 build:
 	@echo "=> building image.. ${IMAGE_TAG}"
-	@docker build -t ${IMAGE_TAG} \
+	docker build -t ${IMAGE_TAG} \
 		--build-arg VPP_REPO=${REPO} \
 		--build-arg VPP_VERSION=${VERSION} \
 		${DOCKER_BUILD_ARGS} .
