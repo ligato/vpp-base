@@ -1,22 +1,21 @@
 FROM ubuntu:18.04
 
-ARG DEBIAN_FRONTEND=noninteractive
-
 RUN apt-get update \
- && apt-get -y install curl gnupg \
+ && apt-get install -y \
+  	curl \
+  	gnupg \
+  	sudo \
  && rm -rf /var/lib/apt/lists/*
 
-ARG REPO=release
- 
-RUN curl -s https://packagecloud.io/install/repositories/fdio/${REPO}/script.deb.sh | bash \
- && apt-cache madison vpp \
- && apt-get update \
- && apt-get install -y vpp vpp-plugins \
- && rm -rf /var/lib/apt/lists/*
+WORKDIR /vpp
 
-RUN dpkg -l vpp
+ARG VPP_REPO=master
+ARG VPP_VERSION
+
+COPY install_vpp.sh .
+RUN bash ./install_vpp.sh \
+ && rm -rf /var/lib/apt/lists/*
 
 COPY vpp.conf /etc/vpp/vpp.conf
 
 CMD ["/usr/bin/vpp","-c","/etc/vpp/vpp.conf"]
-
