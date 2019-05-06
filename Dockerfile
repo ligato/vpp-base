@@ -13,6 +13,7 @@ ARG VPP_REPO=master
 ARG VPP_VERSION
 
 COPY install_vpp.sh .
+
 RUN bash ./install_vpp.sh \
  && rm -rf /var/lib/apt/lists/*
 

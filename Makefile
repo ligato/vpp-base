@@ -1,47 +1,56 @@
 REPO?=master
-VERSION?=
+VPP_VERSION?=
+
+PUSH_TAG?=ligato/vpp-base
+IMAGE_TAG?=vpp-base
+CONTAINER?=vpp-base
 
 ifeq ($(REPO),master)
-IMAGE_TAG=vpp-base:latest
+PUSH_TAG:=$(PUSH_TAG):latest
+IMAGE_TAG:=$(IMAGE_TAG):latest
 else
-IMAGE_TAG=vpp-base:${REPO}
+PUSH_TAG:=$(PUSH_TAG):$(REPO)
+IMAGE_TAG:=$(IMAGE_TAG):$(REPO)
+CONTAINER:=$(CONTAINER).$(REPO)
 endif
 
-CONTAINER_NAME?=vpp-base
-
-default: build
-
 build:
-	@echo "=> building image.. ${IMAGE_TAG}"
-	docker build -t ${IMAGE_TAG} \
+	@echo "=> Building image.."
+	docker build -t ${IMAGE_TAG} --pull \
 		--build-arg VPP_REPO=${REPO} \
 		--build-arg VPP_VERSION=${VERSION} \
 		${DOCKER_BUILD_ARGS} .
-	@echo "-> build OK!"
+	@echo "-> Build OK!"
 	@echo " Image size: `docker images --format '{{.Size}}' ${IMAGE_TAG}`"
 
 rebuild: DOCKER_BUILD_ARGS+=--no-cache
 rebuild: build
-	@echo "=> rebuild OK!"
+	@echo "=> Rebuild OK!"
 
-run: start vppctl
+push: build
+	@echo "=> Tagging image.."
+	docker tag ${IMAGE_TAG} ${PUSH_TAG}
+	@echo "=> Pushing image.."
+	docker push ${PUSH_TAG}
+
+run: start vppctl stop
 
 start:
-	@echo "=> starting container.. ${CONTAINER_NAME}"
-	@docker run -d --rm --name ${CONTAINER_NAME} -v /run/vpp-agent:/run ${IMAGE_TAG}
-	@echo "-> start OK!"
-	@echo " VPP version: `docker exec -it ${CONTAINER_NAME} vppctl show version`"
-	
-exec:
-	@docker exec -it ${CONTAINER_NAME} bash
-
-vppctl:
-	@docker exec -it ${CONTAINER_NAME} vppctl
+	@echo "=> Starting container.."
+	docker run -d --rm --name ${CONTAINER} ${IMAGE_TAG}
+	@echo "-> Start OK!"
+	@echo " VPP version: `docker exec -it ${CONTAINER} vppctl show version`"
 
 stop:
-	@echo "=> stopping container.."
-	@docker stop ${CONTAINER_NAME}
+	@echo "=> Stopping container.."
+	@docker stop ${CONTAINER}
+
+vppctl:
+	@docker exec -it ${CONTAINER} vppctl
+
+exec:
+	@docker exec -it ${CONTAINER} bash
 
 .PHONY: default \
-	build rebuild \
-	run start exec vppctl stop
+		build rebuild push test \
+		run start stop exec vppctl
