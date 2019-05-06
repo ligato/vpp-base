@@ -10,14 +10,14 @@ Run `make` to build image from latest master.
 
 To build VPP using latest package from master branch, run:
 
-```
+```sh
 # master
 $ make build
 ```
 
 To build VPP using package from specific release, run:
 
-```
+```sh
 # stable/1901
 $ make build REPO=1901
 # stable/1904
@@ -27,7 +27,7 @@ $ make build REPO=1904
 
 To run some image in container, run:
 
-```
+```sh
 # starts container
 $ make start
 # opens VPP CLI (vppctl) in container
