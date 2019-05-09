@@ -1,8 +1,8 @@
 # vpp-base
 
-The vpp-base provides docker images used as base for running or building VPP.
+🚧 **This repository is still in experimental stage!**
 
-🚧 **This repository is currently just experimental and things might break!**
+The vpp-base provides docker images used as base for running or building VPP.
 
 ## Quickstart
 
