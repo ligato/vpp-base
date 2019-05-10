@@ -2,11 +2,10 @@
 
 set -exuo pipefail
 
-VPP_REPO=${VPP_REPO:-master}
-REPO_URL=https://packagecloud.io/install/repositories/fdio/${VPP_REPO}
+REPO_URL="https://packagecloud.io/install/repositories/fdio/${REPO:-master}"
 
 # the code below comes from FDio's CSIT project.
-function download_ubuntu_artifacts () {
+function get_vpp () {
    	# Get and/or install Ubuntu VPP artifacts from packagecloud.io.
     #
     # Variables read:
@@ -69,7 +68,7 @@ function download_ubuntu_artifacts () {
 	done
 	set -x
 
-	if [ "${INSTALL:-true}" = true ]; then
+	if [ "${INSTALL:=false}" = true ]; then
 		sudo -E apt-get -y install "${artifacts[@]}" || {
 			die "Install VPP artifacts failed."
 		}
@@ -96,4 +95,4 @@ function die () {
     exit "${2:-1}"
 }
 
-download_ubuntu_artifacts
+get_vpp

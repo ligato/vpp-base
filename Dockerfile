@@ -1,21 +1,23 @@
 FROM ubuntu:18.04
 
 RUN apt-get update \
- && apt-get install -y \
+ && apt-get install -qy \
   	curl \
   	gnupg \
   	sudo \
  && rm -rf /var/lib/apt/lists/*
 
-WORKDIR /vpp
-
-ARG VPP_REPO=master
+ARG REPO=master
 ARG VPP_VERSION
 
-COPY install_vpp.sh .
+WORKDIR /vpp
 
-RUN bash ./install_vpp.sh \
- && rm -rf /var/lib/apt/lists/*
+COPY get-vpp.sh /opt/
+
+RUN set -eux; \
+	/opt/get-vpp.sh; \
+	apt-get install -qy /vpp/*.deb; \
+	rm -rf /var/lib/apt/lists/*;
 
 COPY vpp.conf /etc/vpp/vpp.conf
 

@@ -1,5 +1,6 @@
 REPO?=master
 VPP_VERSION?=
+VPP_COMMIT?=
 
 PUSH_TAG?=ligato/vpp-base
 IMAGE_TAG?=vpp-base
@@ -16,22 +17,29 @@ endif
 
 build:
 	@echo "=> Building image.."
-	docker build -t ${IMAGE_TAG} --pull \
-		--build-arg VPP_REPO=${REPO} \
+	docker build -f Dockerfile \
+		--tag ${IMAGE_TAG} \
+		--build-arg REPO=${REPO} \
 		--build-arg VPP_VERSION=${VERSION} \
 		${DOCKER_BUILD_ARGS} .
 	@echo "-> Build OK!"
 	@echo " Image size: `docker images --format '{{.Size}}' ${IMAGE_TAG}`"
-
-rebuild: DOCKER_BUILD_ARGS+=--no-cache
-rebuild: build
-	@echo "=> Rebuild OK!"
 
 push: build
 	@echo "=> Tagging image.."
 	docker tag ${IMAGE_TAG} ${PUSH_TAG}
 	@echo "=> Pushing image.."
 	docker push ${PUSH_TAG}
+
+build-debug: IMAGE_TAG:=$(IMAGE_TAG)-debug
+build-debug:
+	@echo "=> Building debug image.."
+	docker build -f Dockerfile.build \
+		--tag ${IMAGE_TAG} \
+		--build-arg VPP_COMMIT=${VPP_COMMIT} \
+		${DOCKER_BUILD_ARGS} .
+	@echo "-> Build OK!"
+	@echo " Image size: `docker images --format '{{.Size}}' ${IMAGE_TAG}`"
 
 run: start vppctl stop
 
