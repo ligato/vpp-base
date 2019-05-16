@@ -10,17 +10,17 @@ The vpp-base repository provides tools for building docker images for VPP.
 
 * Use as base image in docker images that work with VPP.
 * Quickly test some feature in specific VPP version.
-* Distribute .deb packages for VPP where needed.
+* Distribute _.deb_ packages for VPP where needed.
 * Generate VPP binary API using installed _.api.json_ files.
 
 ## Image Contents
 
 The vpp-base image consists of:
  
-- **Installed VPP** ready to be started - uses config from: `/etc/vpp/startup.conf`
-- **Script for downloading VPP** from [PackageCloud](https://packagecloud.io/fdio) - script is located at: `/vpp/get-vpp.sh`
-- **All _.deb_ packages** that come with VPP - all packages stored at: `/vpp/*.deb`
-- **VPP version file** containing complete version string, e.g. `19.04.1-rc0~8-gad62a0e91~b49` - file is located at: `/vpp/version` 
+- **Installed VPP** ready for use - uses config from: `/etc/vpp/startup.conf`
+- **Download script** for getting VPP from [PackageCloud](https://packagecloud.io/fdio) - script at: `/vpp/get-vpp.sh`
+- **All _.deb_ packages** that come with VPP version - stored at: `/vpp/*.deb`
+- **VPP version file** containing complete VPP version - file at: `/vpp/version` 
 
 ## Quickstart
 
@@ -52,7 +52,7 @@ Following images are currently published and available on DockerHub:
 
 The complete list of available image tags can be found on [DockerHub](https://hub.docker.com/r/ligato/vpp-base/tags).
 
-## Building Images
+## Building Image
 
 To build custom vpp-base image you can simply use docker build command with without cloning this git repository, you can use:
 
@@ -72,7 +72,7 @@ To build custom vpp-base image you can simply use docker build command with with
 
 ## Makefile Usage
 
-To build VPP image using specific packagecloud repository, use:
+To build vpp-base image with specific [PackageCloud](https://packagecloud.io/fdio) repository, use:
 
 ```sh
 # from master repository
