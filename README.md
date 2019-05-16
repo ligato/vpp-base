@@ -20,7 +20,7 @@ Beside the `vpp-base:latest` image, there are images with stable VPP version. Th
 
 These images are currently available on DockerHub:
 
-| Image tag | VPP version |
+| Image | VPP |
 |---|---|
 | `ligato/vpp-base:latest` | **master** branch |
 | `ligato/vpp-base:1904` |  **stable/1904** branch |
@@ -37,10 +37,10 @@ To quickly build your own vpp-base image locally  without even cloning this repo
 $ docker build github.com/ligato/vpp-base
 
 # Stable VPP 19.04
-$ docker build --build-arg REPO=1904 github.com/ligato/vpp-base
+$ docker build --build-arg REPO='1904' github.com/ligato/vpp-base
 
 # With specific VPP version
-$ docker build --build-arg VPP_VERSION=19.08-rc0~196-g7fe470a54 github.com/ligato/vpp-base
+$ docker build --build-arg VPP_VERSION='19.08-rc0~196-g7fe470a54' github.com/ligato/vpp-base
 
 # With specific VPP commit
 $ docker build --build-arg VPP_VERSION='19.04[^ ]*-g7fe470a54' github.com/ligato/vpp-base
