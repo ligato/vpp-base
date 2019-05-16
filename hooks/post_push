@@ -4,7 +4,7 @@ set -euo pipefail
 
 echo "=> Running post_push hook"
 
-VPP_VERSION=$(docker run --rm $IMAGE_NAME cat /vpp/version | sed -e 's/~/./g')
+VPP_VERSION=$(docker run --rm $IMAGE_NAME cat /vpp/version | cut -d~ -f1,2 | sed -e 's/~/./g')
 
 echo "Tagging image $IMAGE_NAME with additional tag $VPP_VERSION"
 
