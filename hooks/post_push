@@ -1,0 +1,8 @@
+#!/bin/bash
+
+echo "=> Running post_push"
+
+VPP_VERSION=$(docker run --rm $IMAGE_NAME cat /vpp/version)
+
+docker tag $IMAGE_NAME $DOCKER_REPO:$VPP_VERSION
+docker push $DOCKER_REPO:$VPP_VERSION
