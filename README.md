@@ -2,18 +2,25 @@
 
 The vpp-base repository provides tools for building docker images for VPP.
 
-🚧 This repository is currently in experimental stage and breaking changes might happen!
+> 🚧 This repository is currently in experimental stage and breaking changes might happen!
 
 ---
+
+## Use Cases
+
+* Use as base image in docker images that work with VPP.
+* Quickly test some feature in specific VPP version.
+* Distribute .deb packages for VPP where needed.
+* Generate VPP binary API using installed _.api.json_ files.
 
 ## Image Contents
 
 The vpp-base image consists of:
  
-- installed VPP ready to be started (uses default config: `/etc/vpp/startup.conf`)
-- script for installing/downloading VPP from [PackageCloud](https://packagecloud.io/fdio) (script is located at `/vpp/get-vpp.sh`)
-- downloaded VPP packages ready to be installed (stored in `/vpp/*.deb`)
-- file containing full VPP version, e.g. _19.04.1-rc0~8-gad62a0e91~b49_ (located at `/vpp/version`) 
+- **Installed VPP** ready to be started - uses config from: `/etc/vpp/startup.conf`
+- **Script for downloading VPP** from [PackageCloud](https://packagecloud.io/fdio) - script is located at: `/vpp/get-vpp.sh`
+- **All _.deb_ packages** that come with VPP - all packages stored at: `/vpp/*.deb`
+- **VPP version file** containing complete version string, e.g. `19.04.1-rc0~8-gad62a0e91~b49` - file is located at: `/vpp/version` 
 
 ## Quickstart
 
@@ -51,16 +58,16 @@ To build custom vpp-base image you can simply use docker build command with with
 
 ```sh
 # Latest VPP
-$ docker build github.com/ligato/vpp-base
+➢ docker build github.com/ligato/vpp-base
 
 # Stable VPP 19.04
-$ docker build --build-arg REPO='1904' github.com/ligato/vpp-base
+➢ docker build --build-arg REPO='1904' github.com/ligato/vpp-base
 
 # With specific VPP version
-$ docker build --build-arg VPP_VERSION='19.08-rc0~196-g7fe470a54' github.com/ligato/vpp-base
+➢ docker build --build-arg VPP_VERSION='19.08-rc0~196-g7fe470a54' github.com/ligato/vpp-base
 
 # With specific VPP commit
-$ docker build --build-arg VPP_VERSION='19.04[^ ]*-g7fe470a54' github.com/ligato/vpp-base
+➢ docker build --build-arg VPP_VERSION='19.04[^ ]*-g7fe470a54' github.com/ligato/vpp-base
 ```
 
 ## Makefile Usage
@@ -68,16 +75,12 @@ $ docker build --build-arg VPP_VERSION='19.04[^ ]*-g7fe470a54' github.com/ligato
 To build VPP image using specific packagecloud repository, use:
 
 ```sh
-# for master
-$ make build REPO=master
+# from master repository
+➢ make build REPO=master
+
 # this works as well REPO=master is default value
-$ make build 
+➢ make build 
 
-# stable/1901
-$ make build REPO=1901
-
-# stable/1904
-$ make build REPO=1904
-
-# etc..
+# from 1904 repository
+➢ make build REPO=1904
 ```
