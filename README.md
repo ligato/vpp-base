@@ -1,26 +1,41 @@
 # vpp-base
 
+The vpp-base repository provides tools for building docker images for VPP.
+
 🚧 This repository is currently in experimental stage and breaking changes might happen!
 
 ---
 
-The vpp-base provides docker images used as base for running or building VPP.
+## Image Contents
 
-The images are built continuously and published to DockerHub: [ligato/vpp-base](https://hub.docker.com/r/ligato/vpp-base).
+The vpp-base image consists of:
+ 
+- installed VPP ready to be started (uses default config: `/etc/vpp/startup.conf`)
+- script for installing/downloading VPP from [PackageCloud](https://packagecloud.io/fdio) (script is located at `/vpp/get-vpp.sh`)
+- downloaded VPP packages ready to be installed (stored in `/vpp/*.deb`)
+- file containing full VPP version, e.g. _19.04.1-rc0~8-gad62a0e91~b49_ (located at `/vpp/version`) 
 
-## Quick start
+## Quickstart
 
-Following command will get you vpp-base image that comes with _relatively_ recent version of VPP (from master branch):
+Following command will get you vpp-base image that comes with recent version of VPP:
 
 ```sh
-$ docker pull ligato/vpp-base
+➢ docker pull ligato/vpp-base
 ```
 
-## Image versions available
+To show the actual VPP version contained in the image, run:
 
-Beside the `vpp-base:latest` image, there are images with stable VPP version. These images are tagged with the respective VPP version they contain: `ligato/vpp-base:YYMM`. 
+```sh
+➢ docker run --rm ligato/vpp-base cat /vpp/version
+```
 
-These images are currently available on DockerHub:
+## Published Images
+
+The vpp-base images are built continuously and published to DockerHub: [ligato/vpp-base](https://hub.docker.com/r/ligato/vpp-base).
+
+Beside the `vpp-base:latest` image built from master, there are images with stable VPP version. These images are tagged with the respective VPP version they contain: `ligato/vpp-base:YYMM`. 
+
+Following images are currently published and available on DockerHub:
 
 | Image | Details | VPP source |
 |---|---|---|
@@ -28,11 +43,11 @@ These images are currently available on DockerHub:
 |[![ligato/vpp-base:1904](https://img.shields.io/badge/ligato/vpp--base-1904-blue.svg?logo=docker&logoColor=white&style=popout)](https://cloud.docker.com/u/ligato/repository/docker/ligato/vpp-base)|![MicroBadger Size](https://img.shields.io/microbadger/image-size/ligato/vpp-base/1904.svg) ![MicroBadger Layers](https://img.shields.io/microbadger/layers/ligato/vpp-base/1904.svg) | [![1904](https://img.shields.io/badge/packagecloud_repo-1904-37327b.svg?logo=debian)](https://packagecloud.io/fdio/1904) |
 |[![ligato/vpp-base:1901](https://img.shields.io/badge/ligato/vpp--base-1901-blue.svg?logo=docker&logoColor=white&style=popout)](https://cloud.docker.com/u/ligato/repository/docker/ligato/vpp-base)|![MicroBadger Size](https://img.shields.io/microbadger/image-size/ligato/vpp-base/1901.svg) ![MicroBadger Layers](https://img.shields.io/microbadger/layers/ligato/vpp-base/1901.svg )| [![1901](https://img.shields.io/badge/packagecloud_repo-1901-37327b.svg?logo=debian)](https://packagecloud.io/fdio/1901) |
 
-The complete list of available tags can be found on [DockerHub](https://hub.docker.com/r/ligato/vpp-base/tags).
+The complete list of available image tags can be found on [DockerHub](https://hub.docker.com/r/ligato/vpp-base/tags).
 
-## Building custom image
+## Building Images
 
-To quickly build your own vpp-base image locally  without even cloning this repo, use:
+To build custom vpp-base image you can simply use docker build command with without cloning this git repository, you can use:
 
 ```sh
 # Latest VPP
@@ -48,7 +63,7 @@ $ docker build --build-arg VPP_VERSION='19.08-rc0~196-g7fe470a54' github.com/lig
 $ docker build --build-arg VPP_VERSION='19.04[^ ]*-g7fe470a54' github.com/ligato/vpp-base
 ```
 
-## Makefile usage
+## Makefile Usage
 
 To build VPP image using specific packagecloud repository, use:
 
