@@ -4,14 +4,14 @@
 
 The vpp-base provides docker images used as base for running or building VPP.
 
-The images are built daily and published to [ligato/vpp-base](https://hub.docker.com/r/ligato/vpp-base) on DockerHub.
+The images are built continuously and published to DockerHub: [ligato/vpp-base](https://hub.docker.com/r/ligato/vpp-base).
 
 ## Quick start
 
 Following command will get you vpp-base image that comes with _relatively_ recent version of VPP (from master branch):
 
 ```sh
-$ docker pull ligato/vpp-base:latest
+$ docker pull ligato/vpp-base
 ```
 
 ## Image versions available
@@ -22,23 +22,33 @@ These images are currently available on DockerHub:
 
 | Image tag | VPP version |
 |---|---|
-| `ligato/vpp-base:latest` | master |
-| `ligato/vpp-base:1904` |  stable/1904 |
-| `ligato/vpp-base:1901` |  stable/1901 |
+| `ligato/vpp-base:latest` | **master** branch |
+| `ligato/vpp-base:1904` |  **stable/1904** branch |
+| `ligato/vpp-base:1901` |  **stable/1901** branch |
 
 The complete list of available tags can be found on [DockerHub](https://hub.docker.com/r/ligato/vpp-base/tags).
 
 ## Building custom image
 
-You can easily build your own vpp-base image locally without even cloning this repo! Following command will build image with specific VPP version:
+To quickly build your own vpp-base image locally  without even cloning this repo, use:
 
 ```sh
-$ docker build -t my-vpp-base --build-arg VPP_VERSION=19.08-rc0~196-g7fe470a54~b2759 github.com/ligato/vpp-base
+# Latest VPP
+$ docker build github.com/ligato/vpp-base
+
+# Stable VPP 19.04
+$ docker build --build-arg REPO=1904 github.com/ligato/vpp-base
+
+# With specific VPP version
+$ docker build --build-arg VPP_VERSION=19.08-rc0~196-g7fe470a54 github.com/ligato/vpp-base
+
+# With specific VPP commit
+$ docker build --build-arg VPP_VERSION='19.04[^ ]*-g7fe470a54' github.com/ligato/vpp-base
 ```
 
-## Local usage
+## Makefile usage
 
-To build VPP image using specific package, run:
+To build VPP image using specific packagecloud repository, use:
 
 ```sh
 # for master
@@ -54,18 +64,3 @@ $ make build REPO=1904
 
 # etc..
 ```
-
-To run some image in container, run:
-
-```sh
-# starts container
-$ make start
-
-# opens VPP CLI (vppctl) in container
-$ make vppctl
-
-# stops container
-$ make stop
-```
-
-For quick access to CLI run `make run`, it will start container and open VPP CLI.

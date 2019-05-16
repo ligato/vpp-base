@@ -1,6 +1,4 @@
-#!/bin/bash
-
-set -exuo pipefail
+#!/usr/bin/env bash
 
 REPO_URL="https://packagecloud.io/install/repositories/fdio/${REPO:-master}"
 
@@ -15,7 +13,7 @@ function get_vpp () {
 
 	set -exuo pipefail
 
-	curl -s "${REPO_URL}"/script.deb.sh | sudo -E bash || {
+	curl -sS "${REPO_URL}"/script.deb.sh | sudo -E bash || {
 		die "Packagecloud FD.io repo fetch failed."
 	}
 
@@ -68,7 +66,7 @@ function get_vpp () {
 	done
 	set -x
 
-	if [ "${INSTALL:=false}" = true ]; then
+	if [ "${INSTALL:-false}" = true ]; then
 		sudo -E apt-get -y install "${artifacts[@]}" || {
 			die "Install VPP artifacts failed."
 		}
@@ -76,6 +74,7 @@ function get_vpp () {
 		apt-get -y download "${artifacts[@]}" || {
 			die "Download VPP artifacts failed."
 		}
+		dpkg -f vpp_*.deb Version > version
 	fi
 }
 
