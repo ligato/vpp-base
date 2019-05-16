@@ -1,8 +1,12 @@
 #!/bin/bash
 
-echo "=> Running post_push"
+set -euo pipefail
 
-VPP_VERSION=$(docker run --rm $IMAGE_NAME cat /vpp/version)
+echo "=> Running post_push hook"
+
+VPP_VERSION=$(docker run --rm $IMAGE_NAME cat /vpp/version | sed -e 's/~/./g')
+
+echo "Tagging image $IMAGE_NAME with additional tag $VPP_VERSION"
 
 docker tag $IMAGE_NAME $DOCKER_REPO:$VPP_VERSION
 docker push $DOCKER_REPO:$VPP_VERSION
