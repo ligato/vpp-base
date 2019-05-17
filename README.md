@@ -1,6 +1,11 @@
-# vpp-base ![Docker Cloud Automated build](https://img.shields.io/docker/cloud/automated/ligato/vpp-base.svg) ![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/ligato/vpp-base.svg) ![Docker Pulls](https://img.shields.io/docker/pulls/ligato/vpp-base.svg)
+<h1 align="center">vpp-base</h1>
 
-The vpp-base contains code used for building docker images with VPP.
+<p align="center">
+  <a href="https://hub.docker.com/r/ligato/vpp-base/builds"><img src="https://img.shields.io/docker/cloud/build/ligato/vpp-base.svg" alt="Docker Cloud Build Status"></a>
+  <a href="https://hub.docker.com/r/ligato/vpp-base"><img src="https://img.shields.io/docker/pulls/ligato/vpp-base.svg" alt="Docker Pulls"></a>
+</p>
+
+<p align="center">The <b>vpp-base</b> contains code used for building docker images with VPP.</p>
 
 ---
 
@@ -11,6 +16,17 @@ The vpp-base contains code used for building docker images with VPP.
 * Distribute _.deb_ packages for VPP where needed.
 * Generate VPP binary API using installed _.api.json_ files.
 
+## Quickstart
+
+Following command will get you vpp-base image that comes with recent version of VPP:
+
+```sh
+# get the latest image
+➢ docker pull ligato/vpp-base
+# print VPP version used
+➢ docker run --rm ligato/vpp-base cat /vpp/version
+```
+
 ## Image Contents
 
 The vpp-base image consists of:
@@ -20,21 +36,7 @@ The vpp-base image consists of:
 - **All _.deb_ packages** that come with VPP version - stored at: `/vpp/*.deb`
 - **VPP version file** containing complete VPP version - file at: `/vpp/version` 
 
-## Quickstart
-
-Following command will get you vpp-base image that comes with recent version of VPP:
-
-```sh
-➢ docker pull ligato/vpp-base
-```
-
-To show the actual VPP version contained in the image, run:
-
-```sh
-➢ docker run --rm ligato/vpp-base cat /vpp/version
-```
-
-## Published Images
+## Available Versions
 
 The vpp-base images are built continuously and published to DockerHub: [ligato/vpp-base](https://hub.docker.com/r/ligato/vpp-base).
 
