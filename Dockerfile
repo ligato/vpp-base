@@ -1,5 +1,7 @@
-ARG BASE_IMG=ubuntu:18.04
-FROM ${BASE_IMG}
+FROM ubuntu:18.04
+
+ARG REPO=master
+ARG VPP_VERSION
 
 RUN apt-get update \
  && apt-get install -y --no-install-recommends \
@@ -9,9 +11,6 @@ RUN apt-get update \
 		gnupg \
 		sudo \
  && rm -rf /var/lib/apt/lists/*
-
-ARG REPO=master
-ARG VPP_VERSION
 
 WORKDIR /vpp
 
