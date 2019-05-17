@@ -1,0 +1,13 @@
+#!/bin/bash
+
+set -euo pipefail
+
+echo "=> Running post_build hook"
+
+VPP_VERSION=$(docker run --rm $IMAGE_NAME cat /vpp/version | cut -d~ -f1,2 | sed -e 's/~/./g')
+cid=$(docker create --rm $IMAGE_NAME)
+
+echo "Committing the image with additional version labels $VPP_VERSION"
+
+docker commit -c "LABEL vpp.version=$VPP_VERSION org.label-schema.version=$VPP_VERSION" $cid $IMAGE_NAME
+docker rm $cid
