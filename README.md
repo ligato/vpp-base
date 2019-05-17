@@ -35,13 +35,13 @@ To get the latest vpp-base image that contains recent VPP version from the [mast
 
 ## Images
 
-### Available Versions
-
 The vpp-base images are [built continuously][dockercloud-builds] and published on DockerHub to [ligato/vpp-base][dockerhub].
 
-Beside the `vpp-base:latest` image built from master, there are images with stable VPP version. These images are tagged with the respective VPP version they contain: `ligato/vpp-base:YYMM`. 
+### Available Versions
 
-Following images are currently published and available on DockerHub:
+In addition to the latest image built from master, there are other images. For example images containing stable VPP version are tagged with a release they provide: `ligato/vpp-base:YYMM`. 
+
+Here's list of currently published images available:
 
 | Image | Details | VPP source |
 |---|---|---|
