@@ -1,8 +1,6 @@
-# vpp-base
+# vpp-base ![Docker Cloud Automated build](https://img.shields.io/docker/cloud/automated/ligato/vpp-base.svg) ![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/ligato/vpp-base.svg) ![Docker Pulls](https://img.shields.io/docker/pulls/ligato/vpp-base.svg)
 
-The vpp-base repository provides tools for building docker images for VPP.
-
-> 🚧 This repository is currently in experimental stage and breaking changes might happen!
+The vpp-base contains code used for building docker images with VPP.
 
 ---
 
