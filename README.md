@@ -5,7 +5,7 @@
   <a href="https://hub.docker.com/r/ligato/vpp-base"><img src="https://img.shields.io/docker/pulls/ligato/vpp-base.svg" alt="Docker Pulls"></a>
 </p>
 
-<p align="center">The <b>vpp-base</b> contains code used for building docker images with VPP.</p>
+<p align="center">The <b>vpp-base</b> provides code used for building docker images with VPP.</p>
 
 ---
 
