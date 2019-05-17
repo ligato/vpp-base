@@ -18,7 +18,7 @@
 
 ## Quickstart
 
-Following command will get you vpp-base image that comes with recent version of VPP:
+To get the latest vpp-base image that contains recent VPP version from the [master repository][packagecloud-fdio] on packagecloud.io
 
 ```sh
 # get the latest image
@@ -34,7 +34,7 @@ Following command will get you vpp-base image that comes with recent version of 
 The vpp-base image consists of:
  
 - **Installed VPP** ready for use with default config - `/etc/vpp/startup.conf`
-- **Download script** for getting VPP from [PackageCloud][packagecloud-fdio] - `/vpp/get-vpp.sh`
+- **Download script** for getting VPP packages - `/vpp/get-vpp.sh`
 - **All _.deb_ packages** that come with VPP - `/vpp/*.deb`
 - **Version file** that contains VPP version - `/vpp/version` 
 
