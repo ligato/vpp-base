@@ -9,14 +9,18 @@
 
 ---
 
-## Use Cases
+## Introduction
+
+The main goal of vpp-base is to provide images with various VPP versions that can be used as base image for projects working with VPP, because there are no official images provided by the FD.io/VPP. The vpp-base is currently already being used by the [vpp-agent](https://github.com/ligato/vpp-agent).
+
+### Use Cases
 
 * Use as base image in docker images that work with VPP.
 * Quickly test some feature in specific VPP version.
 * Distribute _.deb_ packages for VPP where needed.
 * Generate VPP binary API using installed _.api.json_ files.
 
-## Quickstart
+### Quickstart
 
 To get the latest vpp-base image that contains recent VPP version from the [master repository][packagecloud-fdio] on packagecloud.io
 
@@ -29,18 +33,11 @@ To get the latest vpp-base image that contains recent VPP version from the [mast
 19.08-rc0~235-gfe52dea08~b2798
 ```
 
-## Image Contents
+## Images
 
-The vpp-base image consists of:
- 
-- **Installed VPP** ready for use with default config - `/etc/vpp/startup.conf`
-- **Download script** for getting VPP packages - `/vpp/get-vpp.sh`
-- **All _.deb_ packages** that come with VPP - `/vpp/*.deb`
-- **Version file** that contains VPP version - `/vpp/version` 
+### Available Versions
 
-## Published Versions
-
-The vpp-base images are [built continuously][dockercloud-builds] and published to DockerHub repository [ligato/vpp-base][dockerhub].
+The vpp-base images are [built continuously][dockercloud-builds] and published on DockerHub to [ligato/vpp-base][dockerhub].
 
 Beside the `vpp-base:latest` image built from master, there are images with stable VPP version. These images are tagged with the respective VPP version they contain: `ligato/vpp-base:YYMM`. 
 
@@ -54,7 +51,16 @@ Following images are currently published and available on DockerHub:
 
 The complete list of available image tags can be found on [DockerHub][dockerhub-tags].
 
-## Building Image
+### Image Contents
+
+The vpp-base image contains the following pieces:
+
+- **Installed VPP** ready for use with default config - `/etc/vpp/startup.conf`
+- **Download script** for getting VPP packages - `/vpp/get-vpp.sh`
+- **All _.deb_ packages** that come with VPP - `/vpp/*.deb`
+- **Version file** that contains VPP version - `/vpp/version`
+
+## Building Images
 
 To build custom vpp-base image you can simply use docker build command with without cloning this git repository, you can use:
 
