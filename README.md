@@ -11,7 +11,7 @@
 
 ## Introduction
 
-The main goal of vpp-base is to provide images with various VPP versions that can be used as base image for projects working with VPP, because there are no official images provided by the FD.io/VPP. The vpp-base is currently already being used by the [vpp-agent](https://github.com/ligato/vpp-agent).
+The goal of vpp-base is to provide images with VPP that can be used as base image in projects working with VPP. This is mainly because there are no official images provided by the FD.io/VPP.
 
 ### Use Cases
 
@@ -19,6 +19,8 @@ The main goal of vpp-base is to provide images with various VPP versions that ca
 * Quickly test some feature in specific VPP version.
 * Distribute _.deb_ packages for VPP where needed.
 * Generate VPP binary API using installed _.api.json_ files.
+
+The vpp-base is already being used by the [vpp-agent](https://github.com/ligato/vpp-agent) project.
 
 ### Quickstart
 
@@ -62,7 +64,7 @@ The vpp-base image contains the following pieces:
 
 ## Building Images
 
-To build custom vpp-base image you can simply use docker build command with without cloning this git repository, you can use:
+To build custom vpp-base image you can simply use docker build command with without cloning this git repository:
 
 ```sh
 # Latest VPP
