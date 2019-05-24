@@ -6,7 +6,7 @@
 </p>
 
 <p align="center">The <b>vpp-base</b> provides code used for building docker images with VPP.</p>
-<p align="center">🚧 **This repository is currently in experimental stage!**</p>
+<p align="center">🚧 <b>This repository is currently in experimental stage!</b></p>
 
 ---
 
