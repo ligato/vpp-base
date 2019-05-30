@@ -1,25 +1,25 @@
 FROM ubuntu:18.04
 
-ARG REPO=master
-ARG VPP_VERSION
-
-RUN apt-get update \
- && apt-get install -y --no-install-recommends \
+RUN apt-get update && apt-get install -y --no-install-recommends \
 		apt-transport-https \
 		ca-certificates \
 		curl \
 		gnupg \
-		sudo \
- && rm -rf /var/lib/apt/lists/*
+ 	&& rm -rf /var/lib/apt/lists/*
+
+ARG REPO
+ARG VPP_VERSION
 
 WORKDIR /vpp
 
-COPY get-vpp.sh ./get-vpp.sh
+COPY get-vpp.sh /get-vpp.sh
 
 RUN set -eux; \
-	./get-vpp.sh; \
-	dpkg -f vpp_*.deb Version > version; \
+	/get-vpp.sh; \
     apt-get install -y -V ./*.deb; \
+	dpkg-query -f '${Version}\n' -W vpp; \
 	rm -rf /var/lib/apt/lists/*;
+
+RUN mkdir -p /var/log/vpp
 
 CMD ["/usr/bin/vpp", "-c", "/etc/vpp/startup.conf"]

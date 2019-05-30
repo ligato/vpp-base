@@ -1,6 +1,6 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
-REPO_URL="https://packagecloud.io/install/repositories/fdio/${REPO:-master}"
+[ -z "$REPO_URL" ] && REPO_URL="https://packagecloud.io/install/repositories/fdio/${REPO:-release}"
 
 # the code below comes from FDio's CSIT project.
 function get_vpp () {
@@ -11,9 +11,11 @@ function get_vpp () {
     # - VPP_VERSION - VPP version.
     # - INSTALL - If install packages or download only. Default: download
 
+	ls "*.deb" 2>/dev/null && { die "remove existing *.deb files"; }
+
 	set -exuo pipefail
 
-	curl -sS "${REPO_URL}"/script.deb.sh | sudo -E bash || {
+	curl -sS "${REPO_URL}"/script.deb.sh | bash || {
 		die "Packagecloud FD.io repo fetch failed."
 	}
 
@@ -49,6 +51,7 @@ function get_vpp () {
 	fi
 
 	set +x
+	echo "Finding packages with version: ${VPP_VERSION-}"
 	for package in ${packages}; do
 		# Filter packages with given version
 		pkg_info=$(apt-cache show ${package}) || {
@@ -57,24 +60,23 @@ function get_vpp () {
 		ver=$(echo ${pkg_info} | grep -o "Version: ${VPP_VERSION-}[^ ]*" | \
 			  head -1) || true
 		if [ -n "${ver-}" ]; then
-			echo "Found '${VPP_VERSION-}' among '${package}' versions."
+			echo "+++'${package}' found"
 			ver=$(echo "$ver" | cut -d " " -f 2)
 			artifacts+=(${package[@]/%/=${ver-}})
 		else
-			echo "Didn't find '${VPP_VERSION-}' among '${package}' versions."
+			echo " - '${package}'"
 		fi
 	done
 	set -x
 
 	if [ "${INSTALL:-false}" = true ]; then
-		sudo -E apt-get -y install "${artifacts[@]}" || {
+		apt-get -y install "${artifacts[@]}" || {
 			die "Install VPP artifacts failed."
 		}
 	else
 		apt-get -y download "${artifacts[@]}" || {
 			die "Download VPP artifacts failed."
 		}
-		dpkg -f vpp_*.deb Version > version
 	fi
 }
 
