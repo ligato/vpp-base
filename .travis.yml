@@ -18,6 +18,7 @@ script:
     (
       set -Eexuo pipefail
       make build
+      image="${DOCKER_REPO}:${TAG}"
       docker run --rm "$image" -- dpkg-query -f '${Version}' -W vpp
     )
 
