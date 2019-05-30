@@ -10,7 +10,6 @@ matrix:
 
 before_script:
   - env | sort
-  - docker images
   - export DOCKER_REPO="ligato/vpp-base"
 
 script:
@@ -19,7 +18,7 @@ script:
       set -Eexuo pipefail
       make build
       image="${DOCKER_REPO}:${TAG}"
-      docker run --rm "$image" -- dpkg-query -f '${Version}' -W vpp
+      docker run --rm "$image" dpkg-query -f '${Version}' -W vpp
     )
 
 after_script:
