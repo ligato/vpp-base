@@ -9,7 +9,7 @@ IMAGE_TAG=$(DOCKER_REPO):$(TAG)
 image: build
 
 build:
-	@echo "# Building image $(IMAGE_TAG).."
+	@echo "# Building image: $(IMAGE_TAG)"
 	docker build \
 		--build-arg REPO=${REPO} \
 		--build-arg VPP_VERSION=${VPP_VERSION} \
@@ -18,7 +18,7 @@ build:
 	@echo "# Build OK! Image: `docker images --format '{{.Repository}}:{{.Tag}} ({{.Size}})' ${IMAGE_TAG}`"
 
 push:
-	@echo "# Pushing image $(IMAGE_TAG).."
+	@echo "# Pushing image: $(IMAGE_TAG)"
 	docker push ${IMAGE_TAG}
 
 .PHONY: image build push
