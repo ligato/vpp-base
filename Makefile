@@ -10,7 +10,7 @@ image: build
 
 build:
 	@echo "# Building image $(IMAGE_TAG).."
-	docker build -f Dockerfile \
+	docker build \
 		--build-arg REPO=${REPO} \
 		--build-arg VPP_VERSION=${VPP_VERSION} \
 		--tag ${IMAGE_TAG} \

@@ -18,7 +18,7 @@ script:
     (
       set -Eexuo pipefail
       make build
-      docker run --rm "$image" -- dpkg-query -f '${Version}' -W vpp | grep -q "${VERSION}"
+      docker run --rm "$image" -- dpkg-query -f '${Version}' -W vpp
     )
 
 after_script:
