@@ -18,7 +18,7 @@ COPY get-vpp.sh /get-vpp.sh
 
 RUN set -eux; \
 	/get-vpp.sh; \
-    apt-get install -y -V ./*.deb; \
+	apt-get update && apt-get install -y -V ./*.deb; \
 	dpkg-query -f '${Version}\n' -W vpp; \
 	rm -rf /var/lib/apt/lists/*;
 
