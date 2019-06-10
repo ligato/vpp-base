@@ -19,7 +19,7 @@ COPY get-vpp.sh /get-vpp.sh
 RUN set -eux; \
 	/get-vpp.sh; \
 	apt-get update && apt-get install -y -V ./*.deb; \
-	dpkg-query -f '${Version}\n' -W vpp; \
+	dpkg-query -f '${Version}\n' -W vpp > /vpp/version; \
 	rm -rf /var/lib/apt/lists/*;
 
 RUN mkdir -p /var/log/vpp
