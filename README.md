@@ -81,10 +81,10 @@ To build custom vpp-base image you can simply use docker build command with with
 ➢ docker build --build-arg REPO='1904' github.com/ligato/vpp-base
 
 # With specific VPP version
-➢ docker build --build-arg REPO='master' VPP_VERSION='19.08-rc0~196-g7fe470a54' github.com/ligato/vpp-base
+➢ docker build --build-arg REPO='master' --build-arg VPP_VERSION='19.08-rc0~196-g7fe470a54' github.com/ligato/vpp-base
 
 # With specific VPP commit
-➢ docker build --build-arg REPO='master' VPP_VERSION='19.08[^ ]*-g7fe470a54' github.com/ligato/vpp-base
+➢ docker build --build-arg REPO='master' --build-arg VPP_VERSION='19.08[^ ]*-g7fe470a54' github.com/ligato/vpp-base
 ```
 
 [dockerhub]: https://hub.docker.com/r/ligato/vpp-base
