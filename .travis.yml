@@ -32,3 +32,10 @@ deploy:
   script: make push
   on:
     branch: master
+
+notifications:
+  slack:
+    rooms:
+      - ligato:QNOK2VgHH6k40T8nQxmSgRmo
+    on_success: change
+    on_failure: always
