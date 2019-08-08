@@ -4,8 +4,8 @@ services: docker
 matrix:
   include:
     - env: REPO=master TAG=master
+    - env: REPO=1908 TAG=19.08
     - env: REPO=1904 TAG=19.04
-    - env: REPO=1901 TAG=19.01
     - env: REPO=release TAG=latest
 
 before_script:
