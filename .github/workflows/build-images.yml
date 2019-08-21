@@ -1,13 +1,17 @@
-name: Build and Deploy
-on: [push, pull_request]
+name: Build Images
+
+on:
+  pull_request:
+  push:
+    branches: master
 
 jobs:
   build-deploy:
-    name: "tag: ${{ matrix.tag }} repo: ${{ matrix.repo }}"
+    name: "TAG: ${{ matrix.tag }} REPO: ${{ matrix.repo }}"
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        tag: ['release', 'master', '19.08']
+        tag: ['latest', 'master', '19.08']
         include:
         - tag: 'latest'
           repo: 'release'
@@ -19,19 +23,22 @@ jobs:
     steps:
     - uses: actions/checkout@v1
 
-    - name: Build image
+    - name: Build
       env:
         DOCKER_REPO: ligato/vpp-base
         REPO: ${{ matrix.repo }}
         TAG: ${{ matrix.tag }}
       run: |
         make build
-        docker images
         docker run --rm "$DOCKER_REPO:$TAG" dpkg-query -f '${Version}' -W vpp
 
     - name: Deploy
       env:
-        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        DOCKER_REPO: ligato/vpp-base
+        REPO: ${{ matrix.repo }}
+        TAG: ${{ matrix.tag }}
+      if: github.event_name == 'push'
       run: |
-        echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+        docker images
+        docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+        make push
