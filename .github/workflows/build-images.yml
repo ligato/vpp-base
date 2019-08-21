@@ -10,11 +10,11 @@ jobs:
         tag: ['release', 'master', '19.08']
         include:
         - tag: 'latest'
-          repo: release
+          repo: 'release'
         - tag: 'master'
-          repo: master
+          repo: 'master'
         - tag: '19.08'
-          repo: 1908
+          repo: '1908'
 
     steps:
     - uses: actions/checkout@v1
