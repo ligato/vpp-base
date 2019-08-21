@@ -3,7 +3,7 @@ on: [push]
 
 jobs:
   build-deploy:
-    name: Build with repo ${{ matrix.repo }} image tag ${{ matrix.tag }}
+    name: "tag: ${{ matrix.tag }} repo: ${{ matrix.repo }}"
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -21,12 +21,13 @@ jobs:
 
     - name: Build image
       env:
+        DOCKER_REPO: ligato/vpp-base
         REPO: ${{ matrix.repo }}
         TAG: ${{ matrix.tag }}
       run: |
         make build
         docker images
-        docker run --rm "ligato/vpp-base:$TAG" dpkg-query -f '${Version}' -W vpp
+        docker run --rm "$DOCKER_REPO:$TAG" dpkg-query -f '${Version}' -W vpp
 
     - name: Deploy
       env:
