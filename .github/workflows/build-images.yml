@@ -7,11 +7,14 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
+        tag: ['release', 'master', '19.08']
         include:
-        - repo: release
-          tag: latest
-        - repo: master
-          tag: master
+        - tag: latest
+          repo: release
+        - tag: master
+          repo: master
+        - tag: 19.08
+          repo: 1908
 
     steps:
     - uses: actions/checkout@v1
