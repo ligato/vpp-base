@@ -9,11 +9,11 @@ jobs:
       matrix:
         tag: ['release', 'master', '19.08']
         include:
-        - tag: latest
+        - tag: 'latest'
           repo: release
-        - tag: master
+        - tag: 'master'
           repo: master
-        - tag: 19.08
+        - tag: '19.08'
           repo: 1908
 
     steps:
