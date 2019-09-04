@@ -2,26 +2,30 @@ name: Build Images
 
 on:
   push:
-    branches:
-      - master
+    branches: master
   pull_request:
-    branches:
-      - master
+    branches: master
+  schedule:
+    - cron:  '30 * * * *'
 
 jobs:
   build-deploy:
-    name: "TAG: ${{ matrix.tag }} REPO: ${{ matrix.repo }}"
+    name: "repo:${{ matrix.repo }} tag:${{ matrix.tag }}"
+
     runs-on: ubuntu-latest
+
     strategy:
       matrix:
-        tag: ['latest', 'master', '19.08']
+        tag: ['latest', '19.08', '19.04', 'master']
         include:
         - tag: 'latest'
           repo: 'release'
-        - tag: 'master'
-          repo: 'master'
         - tag: '19.08'
           repo: '1908'
+        - tag: '19.04'
+          repo: '1904'
+        - tag: 'master'
+          repo: 'master'
 
     steps:
     - uses: actions/checkout@v1
@@ -42,6 +46,7 @@ jobs:
         TAG: ${{ matrix.tag }}
       if: github.event_name == 'push'
       run: |
-        docker images
+        env | sort
+        docker images "$DOCKER_REPO"
         docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
         make push

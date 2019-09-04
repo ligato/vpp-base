@@ -20,9 +20,9 @@ build:
 push: VPP_VERSION=$(shell docker run --rm $(IMAGE_TAG) cat /vpp/version | cut -d'~' -f1,2 | sed -e 's/~/./g')
 push:
 	@echo "# Pushing image: $(IMAGE_TAG) - $(DOCKER_REPO):$(VPP_VERSION)"
-	@curl -sS -f -lL "https://index.docker.io/v1/repositories/$(DOCKER_REPO)/tags/$(VPP_VERSION)" > /dev/null || \
+	@curl -sSflL "https://index.docker.io/v1/repositories/$(DOCKER_REPO)/tags/$(VPP_VERSION)" || \
 	( \
-		set -exu; \
+		set -Eexu; \
 		docker tag "$(IMAGE_TAG)" "$(DOCKER_REPO):$(VPP_VERSION)"; \
 		docker push "$(DOCKER_REPO):$(VPP_VERSION)"; \
 		docker push "$(IMAGE_TAG)"; \
