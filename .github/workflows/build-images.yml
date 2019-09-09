@@ -44,7 +44,6 @@ jobs:
         DOCKER_REPO: ligato/vpp-base
         REPO: ${{ matrix.repo }}
         TAG: ${{ matrix.tag }}
-      if: github.event_name == 'push'
       run: |
         env | sort
         docker images "$DOCKER_REPO"
