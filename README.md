@@ -39,14 +39,7 @@ The vpp-base images are built continuously and published on DockerHub to [ligato
 
 #### Available Versions
 
-In addition to the latest image tag built from release repo, there are other versions available. 
-
-Images that contain:
-- unstable VPP version (master) is tagged with: `ligato/vpp-base:master`
-- stable VPP version are tagged using the particular release number: `ligato/vpp-base:YY.MM`
-- specific VPP versions are tagged using the complete version number: `ligato/vpp-base:YY.MM-rcX.N-gabcdefg` (e.g. `ligato/vpp-base:19.08-rc0.324-g2ecf18a55`)
-
-Here's list of currently published images available:
+Here's list of currently availables images:
 
 | Image Tag | VPP Source | Details |
 |---|---|---|
@@ -56,6 +49,11 @@ Here's list of currently published images available:
 |[![19.04](https://img.shields.io/badge/ligato/vpp--base-19.04-blue.svg?logo=docker&logoColor=white&style=popout)][dockerhub] | [![1904](https://img.shields.io/badge/packagecloud-fdio/1904-37327b.svg?logo=debian)](https://packagecloud.io/fdio/1904) | [![](https://images.microbadger.com/badges/image/ligato/vpp-base:19.04.svg)](https://microbadger.com/images/ligato/vpp-base:19.04) |
 
 The complete list of available image tags can be found on [DockerHub][dockerhub-tags].
+
+Images that contain:
+- unstable VPP version (master) is tagged with: `ligato/vpp-base:master`
+- stable VPP version are tagged using the particular release number: `ligato/vpp-base:YY.MM`
+- specific VPP versions are tagged using the complete version number: `ligato/vpp-base:YY.MM-rcX.N-gabcdefg` (e.g. `ligato/vpp-base:19.08-rc0.324-g2ecf18a55`)
 
 #### Image Contents
 
@@ -86,11 +84,11 @@ To build vpp-base image you can simply use docker build command with without clo
 ➢ docker build --build-arg REPO='master' --build-arg VPP_VERSION='19.08[^ ]*-g7fe470a54' github.com/ligato/vpp-base
 ```
 
-## With custom VPP from local debian packages
+### With custom VPP from local build
 
 To build vpp-base with custom VPP which installs from local debian packages you can use the [custom](custom/Dockerfile) which adds .deb packages from custom directory and installs them.
 
-NOTE: The VPP repository can be cloned into `vpp` directory at the root of this repo.
+NOTE: The VPP repository can be cloned into `vpp` directory at the root of this repo (will be ignored by git).
 
 ```sh
 # build VPP
