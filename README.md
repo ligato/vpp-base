@@ -1,7 +1,8 @@
 <h1 align="center">vpp-base</h1>
 
 <p align="center">
-  <a href="https://hub.docker.com/r/ligato/vpp-base/builds"><img src="https://img.shields.io/docker/cloud/build/ligato/vpp-base.svg" alt="Docker Cloud Build Status"></a>
+  <a href="https://travis-ci.com/ligato/vpp-base"><img src="https://travis-ci.com/ligato/vpp-base.svg?branch=master" alt="Travis Status"></a>
+  <a href="https://hub.docker.com/r/ligato/vpp-base/builds"><img src="https://img.shields.io/docker/cloud/build/ligato/vpp-base.svg" alt="Dockerhub Status"></a>
   <a href="https://hub.docker.com/r/ligato/vpp-base"><img src="https://img.shields.io/docker/pulls/ligato/vpp-base.svg" alt="Docker Pulls"></a>
 </p>
 
