@@ -20,6 +20,7 @@ RUN set -eux; \
 	/get-vpp.sh; \
 	apt-get update && apt-get install -y -V ./*.deb; \
 	dpkg-query -f '${Version}\n' -W vpp > /vpp/version; \
+	rm -rf vom*.deb vpp-debug*.deb; \
 	rm -rf /var/lib/apt/lists/*;
 
 RUN mkdir -p /var/log/vpp
