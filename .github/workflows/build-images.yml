@@ -1,14 +1,18 @@
-name: Build Images
+name: "Images"
 
 on:
+  pull_request:
+    branches: 
+      - master
+  push:
+    branches: 
+      - master
   schedule:
     - cron: '0 */12 * * *'
 
 jobs:
-  build-deploy:
-    name: "repo:${{ matrix.repo }} tag:${{ matrix.tag }}"
-
-    runs-on: ubuntu-latest
+  build-images:
+    name: "Build tag ${{ matrix.tag }} from repo ${{ matrix.repo }}"
 
     strategy:
       matrix:
@@ -22,20 +26,22 @@ jobs:
           repo: '1904'
         - tag: 'master'
           repo: 'master'
+    
+    runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v1
 
-    - name: Build
+    - name: "Build image"
       env:
         DOCKER_REPO: ligato/vpp-base
         REPO: ${{ matrix.repo }}
         TAG: ${{ matrix.tag }}
       run: |
-        make build
-        docker run --rm "$DOCKER_REPO:$TAG" dpkg-query -f '${Version}' -W vpp
+        	docker build --build-arg REPO="$(REPO)" --build-arg VPP_VERSION="$(VPP_VERSION)" --tag $(IMAGE_TAG) .
+          docker run --rm "$DOCKER_REPO:$TAG" dpkg-query -f '${Version}' -W vpp
 
-    - name: Deploy
+    - name: "Deploy image"
       env:
         DOCKER_REPO: ligato/vpp-base
         REPO: ${{ matrix.repo }}
