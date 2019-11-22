@@ -1,4 +1,4 @@
-name: "Images"
+name: Docker Image CI
 
 on:
   pull_request:
@@ -11,9 +11,10 @@ on:
     - cron: '0 */12 * * *'
 
 jobs:
+
   build-images:
     name: "Build tag ${{ matrix.tag }} from repo ${{ matrix.repo }}"
-
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         tag: ['latest', '19.08', '19.04', 'master']
@@ -27,8 +28,6 @@ jobs:
         - tag: 'master'
           repo: 'master'
     
-    runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v1
 
@@ -38,7 +37,7 @@ jobs:
         REPO: ${{ matrix.repo }}
         TAG: ${{ matrix.tag }}
       run: |
-        	docker build --build-arg REPO="$(REPO)" --build-arg VPP_VERSION="$(VPP_VERSION)" --tag $(IMAGE_TAG) .
+        	docker build  . --build-arg $REPO --tag "$DOCKER_REPO:$TAG"
           docker run --rm "$DOCKER_REPO:$TAG" dpkg-query -f '${Version}' -W vpp
 
     - name: "Deploy image"
@@ -46,8 +45,10 @@ jobs:
         DOCKER_REPO: ligato/vpp-base
         REPO: ${{ matrix.repo }}
         TAG: ${{ matrix.tag }}
+      if: github.event != 'pull_request'
       run: |
-        env | sort
         docker images "$DOCKER_REPO"
+        export VPP_VERSION=docker run --rm "$DOCKER_REPO:$TAG" cat /vpp/version | cut -d'~' -f1,2 | sed -e 's/~/./g'
+        echo "docker tag $DOCKER_REPO:$REPO $DOCKER_REPO:$VPP_VERSION"
         docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-        make push
+        echo "docker push $DOCKER_REPO:$TAG
