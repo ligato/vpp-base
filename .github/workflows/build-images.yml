@@ -6,11 +6,12 @@ on:
 
 jobs:
   build-deploy:
-    name: "repo:${{ matrix.repo }} tag:${{ matrix.tag }}"
+    name: "from ${{ matrix.repo }} repo as tag `:${{ matrix.tag }}`"
 
     runs-on: ubuntu-latest
 
     strategy:
+      fail-fast: false
       matrix:
         tag: ['latest', '19.08', '19.04', 'master']
         include:
