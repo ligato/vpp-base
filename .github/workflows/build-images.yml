@@ -12,13 +12,13 @@ on:
 
 jobs:
   build-images:
-    name: "VPP ${{ matrix.tag }} / repo:${{ matrix.repo }}"
+    name: "VPP ${{ matrix.tag }}"
     runs-on: ubuntu-latest
 
     strategy:
       fail-fast: false
       matrix:
-        tag: ['latest', '19.08', '19.04', 'master']
+        tag: ['master', 'latest', '19.08', '19.04']
         include:
         - tag: 'master'
           repo: 'master'
