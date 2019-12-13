@@ -16,6 +16,7 @@ jobs:
     name: "tag=${{ matrix.tag }} repo=${{ matrix.repo }}"
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         tag: ['latest', '19.08', '19.04', 'master']
         include:
