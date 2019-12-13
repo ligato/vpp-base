@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: Build Images
 
 on:
   pull_request:
@@ -11,10 +11,10 @@ on:
     - cron: '0 */12 * * *'
 
 jobs:
-
   build-images:
-    name: "tag=${{ matrix.tag }} repo=${{ matrix.repo }}"
+    name: "VPP ${{ matrix.tag }}"
     runs-on: ubuntu-latest
+
     strategy:
       fail-fast: false
       matrix:
