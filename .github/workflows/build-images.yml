@@ -9,7 +9,7 @@ on:
 
 jobs:
   build-deploy:
-    name: "from ${{ matrix.repo }} repo as tag `:${{ matrix.tag }}`"
+    name: "from repo/${{ matrix.repo }} as tag/${{ matrix.tag }}"
 
     runs-on: ubuntu-latest
 
