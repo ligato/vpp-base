@@ -12,7 +12,7 @@ on:
 
 jobs:
   build-images:
-    name: "VPP ${{ matrix.tag }}"
+    name: "VPP ${{ matrix.tag }} / repo:${{ matrix.repo }}"
     runs-on: ubuntu-latest
 
     strategy:
@@ -20,14 +20,14 @@ jobs:
       matrix:
         tag: ['latest', '19.08', '19.04', 'master']
         include:
+        - tag: 'master'
+          repo: 'master'
         - tag: 'latest'
           repo: 'release'
         - tag: '19.08'
           repo: '1908'
         - tag: '19.04'
           repo: '1904'
-        - tag: 'master'
-          repo: 'master'
     
     steps:
     - uses: actions/checkout@v1
