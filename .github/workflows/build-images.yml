@@ -13,7 +13,7 @@ on:
 jobs:
 
   build-images:
-    name: "Build tag ${{ matrix.tag }} from repo ${{ matrix.repo }}"
+    name: "tag=${{ matrix.tag }} repo=${{ matrix.repo }}"
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -41,7 +41,7 @@ jobs:
         docker run --rm "$DOCKER_REPO:$TAG" dpkg-query -f '${Version}' -W vpp
 
     - name: "Deploy image"
-      if: github.event != 'pull_request'
+      if: github.event_name != 'pull_request'
       env:
         DOCKER_REPO: ligato/vpp-base
         REPO: ${{ matrix.repo }}
