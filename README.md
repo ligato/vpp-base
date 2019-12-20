@@ -1,8 +1,9 @@
 <h1 align="center">vpp-base</h1>
 
 <p align="center">
+  <a href="https://github.com/ligato/vpp-base/actions?query=workflow%3A%22Build+Images%22"><img src="https://github.com/ligato/vpp-base/workflows/Build%20Images/badge.svg" alt="Workflow"></a>
   <a href="https://travis-ci.com/ligato/vpp-base"><img src="https://travis-ci.com/ligato/vpp-base.svg?branch=master" alt="Travis Status"></a>
-  <a href="https://hub.docker.com/r/ligato/vpp-base/builds"><img src="https://img.shields.io/docker/cloud/build/ligato/vpp-base.svg" alt="Dockerhub Status"></a>
+  <a href="https://microbadger.com/images/ligato/vpp-base"><img src="https://images.microbadger.com/badges/version/ligato/vpp-base.svg" alt="Latest Version"></a>
   <a href="https://hub.docker.com/r/ligato/vpp-base"><img src="https://img.shields.io/docker/pulls/ligato/vpp-base.svg" alt="Docker Pulls"></a>
 </p>
 
@@ -12,26 +13,28 @@
 
 ## Introduction
 
-The goal of vpp-base is to provide images with VPP that can be used as base image in projects working with VPP. This is mainly because there are no official images provided by the FD.io/VPP.
+The goal of vpp-base is to provide images with VPP that can be used 
+as base image in projects working with VPP. This is mainly because 
+there are no official images provided by the FD.io/VPP.
 
 #### Use Cases
 
-* use as base image in docker images that work with VPP
-* quickly test some feature in specific VPP version
-* distribute _.deb_ packages for VPP where needed
-* generate VPP binary API using installed _.api.json_ files
+* use as base image in docker images
+* test something against specific VPP versions
+* get _.deb_ packages for installing VPP
+* generate VPP binary API from _.api.json_ files
 
 ## Quickstart
 
-To get vpp-base image with latest VPP release, run:
+To get docker image with latest VPP release:
 
 ```sh
-# pull image with latest VPP release
-➢ docker pull ligato/vpp-base
+# get image with latest VPP release
+➢ docker pull ligato/vpp-base:latest
 
-# print the VPP version
+# print VPP version
 ➢ docker run --rm ligato/vpp-base cat /vpp/version
-19.04.1-release
+19.08.1-release
 ```
 
 ## Images
@@ -62,8 +65,36 @@ The vpp-base image contains the following pieces:
 
 - **Installed VPP** ready for use with default config - `/etc/vpp/startup.conf`
 - **Download script** for getting VPP packages - `/get-vpp.sh`
-- **All _.deb_ packages** that come with VPP - `/vpp/*.deb`
+- **Debian packages** that come with VPP - `/vpp/*.deb`
 - **Version file** that contains VPP version - `/vpp/version`
+
+```sh
+# list files in /vpp/
+➤ docker run --rm -i ligato/vpp-base ls -gh                                                                                                                                                                                                                                                                                                                                                                                 🕑11:12:34 
+total 93M
+-rw-r--r-- 1 root 142K Sep 18 19:52 libvppinfra-dev_19.08.1-release_amd64.deb
+-rw-r--r-- 1 root 166K Sep 18 19:52 libvppinfra_19.08.1-release_amd64.deb
+-rw-r--r-- 1 root  22K Sep 18 19:52 python3-vpp-api_19.08.1-release_amd64.deb
+-rw-r--r-- 1 root   16 Sep 19 00:05 version
+-rw-r--r-- 1 root  22K Sep 18 19:52 vpp-api-python_19.08.1-release_amd64.deb
+-rw-r--r-- 1 root  84M Sep 18 19:52 vpp-dbg_19.08.1-release_amd64.deb
+-rw-r--r-- 1 root 896K Sep 18 19:52 vpp-dev_19.08.1-release_amd64.deb
+-rw-r--r-- 1 root 2.7M Sep 18 19:52 vpp-plugin-core_19.08.1-release_amd64.deb
+-rw-r--r-- 1 root 2.5M Sep 18 19:52 vpp-plugin-dpdk_19.08.1-release_amd64.deb
+-rw-r--r-- 1 root 3.3M Sep 18 19:52 vpp_19.08.1-release_amd64.deb
+
+# print installed VPP packages
+➤ docker run --rm -i ligato/vpp-base dpkg-query -W '*vpp*'                                                                                                                                                                                                                                                                                                                                                                  🕑10:02:47 
+libvppinfra	19.08.1-release
+libvppinfra-dev	19.08.1-release
+python3-vpp-api	19.08.1-release
+vpp	19.08.1-release
+vpp-api-python	19.08.1-release
+vpp-dbg	19.08.1-release
+vpp-dev	19.08.1-release
+vpp-plugin-core	19.08.1-release
+vpp-plugin-dpdk	19.08.1-release
+```
 
 ## Building Images
 
@@ -94,9 +125,9 @@ NOTE: The VPP repository can be cloned into `vpp` directory at the root of this 
 ```sh
 # build VPP
 (
-	cd vpp
-	make install-dep install-ext-deps
-	make pkg-deb
+  cd vpp
+  make install-dep install-ext-deps
+  make pkg-deb
 )
 
 # copy debian packages from build-root
