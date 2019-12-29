@@ -6,22 +6,21 @@
   <a href="https://hub.docker.com/r/ligato/vpp-base"><img src="https://img.shields.io/docker/pulls/ligato/vpp-base.svg" alt="Docker Pulls"></a>
 </p>
 
-<p align="center">The <b>vpp-base</b> provides tools for building docker images with VPP.</p>
+<p align="center">The <b>vpp-base</b> builds docker images with VPP.</p>
 
 ---
 
 ## Introduction
 
-The goal of vpp-base is to provide images with VPP that can be used 
-as base image in projects working with VPP. This is mainly because 
-there are no official images provided by the FD.io/VPP.
+The purpose of vpp-base is to provide docker images with installed VPP.
+This is mainly because there are no official docker images provided by the FD.io.
 
 #### Use Cases
 
-* use as base image in docker images
-* test something against specific VPP versions
-* get _.deb_ packages for installing VPP
-* generate VPP binary API from _.api.json_ files
+* use as a base image in other projects
+* quickly test something against specific VPP version
+* distribute Debian (_*.deb_) packages for VPP
+* generate VPP binary API from VPP API (_*.api.json_) files
 
 ## Quickstart
 
