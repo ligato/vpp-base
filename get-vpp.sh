@@ -57,12 +57,15 @@ function get_vpp () {
 		pkg_info=$(apt-cache show ${package}) || {
 			die "apt-cache show on ${package} failed."
 		}
-		ver=$(echo ${pkg_info} | grep -o "Version: ${VPP_VERSION-}[^ ]*" | \
-			  head -1) || true
+		ver=$(echo ${pkg_info} | grep -o "Version: ${VPP_VERSION-}[^ ]*" | head -1) || true
 		if [ -n "${ver-}" ]; then
-			echo "+++'${package}' found"
-			ver=$(echo "$ver" | cut -d " " -f 2)
-			artifacts+=(${package[@]/%/=${ver-}})
+			if [ "${package}" == "vom" ]; then
+				echo " x '${package}' skipped"
+			else
+				echo "+++'${package}' found"
+				ver=$(echo "$ver" | cut -d " " -f 2)
+				artifacts+=(${package[@]/%/=${ver-}})
+			fi
 		else
 			echo " - '${package}'"
 		fi
