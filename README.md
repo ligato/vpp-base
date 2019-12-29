@@ -68,7 +68,7 @@ The vpp-base image contains the following pieces:
 
 ```sh
 # list files in /vpp/
-➤ docker run --rm -i ligato/vpp-base ls -gh                                                                                                                                                                                                                                                                                                                                                                                 🕑11:12:34 
+➤ docker run --rm -i ligato/vpp-base ls -gh
 total 93M
 -rw-r--r-- 1 root 142K Sep 18 19:52 libvppinfra-dev_19.08.1-release_amd64.deb
 -rw-r--r-- 1 root 166K Sep 18 19:52 libvppinfra_19.08.1-release_amd64.deb
@@ -82,7 +82,7 @@ total 93M
 -rw-r--r-- 1 root 3.3M Sep 18 19:52 vpp_19.08.1-release_amd64.deb
 
 # print installed VPP packages
-➤ docker run --rm -i ligato/vpp-base dpkg-query -W '*vpp*'                                                                                                                                                                                                                                                                                                                                                                  🕑10:02:47 
+➤ docker run --rm -i ligato/vpp-base dpkg-query -W '*vpp*'
 libvppinfra	19.08.1-release
 libvppinfra-dev	19.08.1-release
 python3-vpp-api	19.08.1-release
