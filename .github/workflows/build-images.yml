@@ -1,51 +1,55 @@
 name: Build Images
 
 on:
+  pull_request:
+    branches: 
+      - master
   push:
-    branches:
+    branches: 
       - master
   schedule:
     - cron: '0 */12 * * *'
 
 jobs:
-  build-deploy:
-    name: "from repo/${{ matrix.repo }} as tag/${{ matrix.tag }}"
-
+  build-images:
+    name: "VPP ${{ matrix.tag }}"
     runs-on: ubuntu-latest
 
     strategy:
       fail-fast: false
       matrix:
-        tag: ['latest', '19.08', '19.04', 'master']
+        tag: ['master', 'latest', '19.08', '19.04']
         include:
+        - tag: 'master'
+          repo: 'master'
         - tag: 'latest'
           repo: 'release'
         - tag: '19.08'
           repo: '1908'
         - tag: '19.04'
           repo: '1904'
-        - tag: 'master'
-          repo: 'master'
-
+    
     steps:
     - uses: actions/checkout@v1
 
-    - name: Build
+    - name: "Build image"
       env:
         DOCKER_REPO: ligato/vpp-base
         REPO: ${{ matrix.repo }}
         TAG: ${{ matrix.tag }}
       run: |
-        make build
+        docker build . --build-arg $REPO --tag "$DOCKER_REPO:$TAG"
         docker run --rm "$DOCKER_REPO:$TAG" dpkg-query -f '${Version}' -W vpp
 
-    - name: Deploy
+    - name: "Deploy image"
+      if: github.event_name != 'pull_request'
       env:
         DOCKER_REPO: ligato/vpp-base
         REPO: ${{ matrix.repo }}
         TAG: ${{ matrix.tag }}
       run: |
-        env | sort
         docker images "$DOCKER_REPO"
+        export VPP_VERSION=docker run --rm "$DOCKER_REPO:$TAG" cat /vpp/version | cut -d'~' -f1,2 | sed -e 's/~/./g'
+        echo "docker tag $DOCKER_REPO:$REPO $DOCKER_REPO:$VPP_VERSION"
         docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-        make push
+        echo "docker push $DOCKER_REPO:$TAG
