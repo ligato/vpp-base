@@ -45,7 +45,7 @@ jobs:
       if: github.event_name != 'pull_request'
       run: |
         export VPP_VERSION=$(docker run --rm "$DOCKER_REPO:$TAG" cat /vpp/version | cut -d'~' -f1,2 | sed -e 's/~/./g')
-        docker tag "$DOCKER_REPO:$REPO" "$DOCKER_REPO:$VPP_VERSION"
+        docker tag "$DOCKER_REPO:$TAG" "$DOCKER_REPO:$VPP_VERSION"
         docker images "$DOCKER_REPO"
         if curl -sSflL "https://index.docker.io/v1/repositories/$DOCKER_REPO/tags/$VPP_VERSION" >/dev/null; then
           echo "Image $DOCKER_REPO:$VPP_VERSION has already been published."
