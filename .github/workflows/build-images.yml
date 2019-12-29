@@ -30,7 +30,8 @@ jobs:
           repo: '1904'
     
     steps:
-    - uses: actions/checkout@v1
+    - name: "Checkout"
+      uses: actions/checkout@v1
 
     - name: "Build image"
       env:
@@ -51,7 +52,9 @@ jobs:
         docker images "$DOCKER_REPO"
         export VPP_VERSION=$(docker run --rm "$DOCKER_REPO:$TAG" cat /vpp/version | cut -d'~' -f1,2 | sed -e 's/~/./g')
         echo "docker tag $DOCKER_REPO:$REPO $DOCKER_REPO:$VPP_VERSION"
-        curl -sSflL "https://index.docker.io/v1/repositories/$DOCKER_REPO/tags/$VPP_VERSION" || true
-        docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-        echo "docker push $DOCKER_REPO:$VPP_VERSION"
-        echo "docker push $DOCKER_REPO:$TAG"
+        curl -sSflL "https://index.docker.io/v1/repositories/$DOCKER_REPO/tags/$VPP_VERSION" || \
+        ( \
+          docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}; \
+          echo "docker push $DOCKER_REPO:$VPP_VERSION"; \
+          echo "docker push $DOCKER_REPO:$TAG"; \
+        )
