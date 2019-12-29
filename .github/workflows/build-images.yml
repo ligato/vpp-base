@@ -31,7 +31,7 @@ jobs:
     
     steps:
     - name: "Checkout"
-      uses: actions/checkout@v1
+      uses: actions/checkout@v2
 
     - name: "Build image"
       env:
@@ -42,19 +42,20 @@ jobs:
         docker build --build-arg REPO="$REPO" --tag "$DOCKER_REPO:$TAG" .
         docker run --rm "$DOCKER_REPO:$TAG" dpkg-query -f '${Version}' -W vpp
 
-    - name: "Deploy image"
-#      if: github.event_name != 'pull_request'
+    - name: "Publish image"
+      if: github.event_name != 'pull_request'
       env:
         DOCKER_REPO: ligato/vpp-base
         REPO: ${{ matrix.repo }}
         TAG: ${{ matrix.tag }}
       run: |
-        docker images "$DOCKER_REPO"
         export VPP_VERSION=$(docker run --rm "$DOCKER_REPO:$TAG" cat /vpp/version | cut -d'~' -f1,2 | sed -e 's/~/./g')
         echo "docker tag $DOCKER_REPO:$REPO $DOCKER_REPO:$VPP_VERSION"
-        curl -sSflL "https://index.docker.io/v1/repositories/$DOCKER_REPO/tags/$VPP_VERSION" || \
-        ( \
-          docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}; \
-          echo "docker push $DOCKER_REPO:$VPP_VERSION"; \
-          echo "docker push $DOCKER_REPO:$TAG"; \
-        )
+        docker images "$DOCKER_REPO"
+        if curl -sSflL "https://index.docker.io/v1/repositories/$DOCKER_REPO/tags/$VPP_VERSION"; then
+          echo "Image $DOCKER_REPO:$VPP_VERSION has already been published."
+        else
+          docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+          echo "docker push $DOCKER_REPO:$VPP_VERSION"
+          echo "docker push $DOCKER_REPO:$TAG"
+        fi
