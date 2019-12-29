@@ -2,7 +2,6 @@
 
 <p align="center">
   <a href="https://github.com/ligato/vpp-base/actions?query=workflow%3A%22Build+Images%22"><img src="https://github.com/ligato/vpp-base/workflows/Build%20Images/badge.svg" alt="Workflow"></a>
-  <a href="https://travis-ci.com/ligato/vpp-base"><img src="https://travis-ci.com/ligato/vpp-base.svg?branch=master" alt="Travis Status"></a>
   <a href="https://microbadger.com/images/ligato/vpp-base"><img src="https://images.microbadger.com/badges/version/ligato/vpp-base.svg" alt="Latest Version"></a>
   <a href="https://hub.docker.com/r/ligato/vpp-base"><img src="https://img.shields.io/docker/pulls/ligato/vpp-base.svg" alt="Docker Pulls"></a>
 </p>
