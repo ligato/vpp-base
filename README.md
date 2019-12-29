@@ -2,7 +2,7 @@
 
 <p align="center">
   <a href="https://github.com/ligato/vpp-base/actions?query=workflow%3A%22Build+Images%22"><img src="https://github.com/ligato/vpp-base/workflows/Build%20Images/badge.svg" alt="Workflow"></a>
-  <a href="https://microbadger.com/images/ligato/vpp-base"><img src="https://images.microbadger.com/badges/version/ligato/vpp-base.svg" alt="Latest Version"></a>
+    <a href="https://microbadger.com/images/ligato/vpp-base"><img src="https://images.microbadger.com/badges/version/ligato/vpp-base.svg" alt="Latest Version"></a>
   <a href="https://hub.docker.com/r/ligato/vpp-base"><img src="https://img.shields.io/docker/pulls/ligato/vpp-base.svg" alt="Docker Pulls"></a>
 </p>
 
@@ -41,22 +41,25 @@ The vpp-base images are built continuously and published on DockerHub to [ligato
 
 #### Available Versions
 
-Here's list of currently availables images:
+List of currently maintained versions:
 
-| Image Tag | VPP Source | Details |
-|---|---|---|
-|[![latest](https://img.shields.io/badge/ligato/vpp--base-latest-green.svg?logo=docker&logoColor=white&style=popout)][dockerhub] | [![release](https://img.shields.io/badge/packagecloud-fdio/release-37327b.svg?logo=debian)](https://packagecloud.io/fdio/release) | [![](https://images.microbadger.com/badges/image/ligato/vpp-base:latest.svg)](https://microbadger.com/images/ligato/vpp-base:latest) |
-|[![master](https://img.shields.io/badge/ligato/vpp--base-master-red.svg?logo=docker&logoColor=white&style=popout)][dockerhub] | [![master](https://img.shields.io/badge/packagecloud-fdio/master-37327b.svg?logo=debian)](https://packagecloud.io/fdio/master) | [![](https://images.microbadger.com/badges/image/ligato/vpp-base:master.svg)](https://microbadger.com/images/ligato/vpp-base:master) |
-|[![19.08](https://img.shields.io/badge/ligato/vpp--base-19.08-blue.svg?logo=docker&logoColor=white&style=popout)][dockerhub] | [![1908](https://img.shields.io/badge/packagecloud-fdio/1908-37327b.svg?logo=debian)](https://packagecloud.io/fdio/1908) | [![](https://images.microbadger.com/badges/image/ligato/vpp-base:19.08.svg)](https://microbadger.com/images/ligato/vpp-base:19.08) |
-|[![19.04](https://img.shields.io/badge/ligato/vpp--base-19.04-blue.svg?logo=docker&logoColor=white&style=popout)][dockerhub] | [![1904](https://img.shields.io/badge/packagecloud-fdio/1904-37327b.svg?logo=debian)](https://packagecloud.io/fdio/1904) | [![](https://images.microbadger.com/badges/image/ligato/vpp-base:19.04.svg)](https://microbadger.com/images/ligato/vpp-base:19.04) |
+| Image Tag | VPP Origin | Details | Notes |
+|---|---|---|---|
+|[![latest](https://img.shields.io/badge/ligato/vpp--base-latest-green.svg?logo=docker&logoColor=white&style=popout)][dockerhub] | [![release](https://img.shields.io/badge/packagecloud-fdio/release-37327b.svg?logo=debian)](https://packagecloud.io/fdio/release) | [![](https://images.microbadger.com/badges/image/ligato/vpp-base:latest.svg)](https://microbadger.com/images/ligato/vpp-base:latest) | ✔️ Latest Release (stable) ![Version](https://images.microbadger.com/badges/version/ligato/vpp-base.svg) |
+|[![master](https://img.shields.io/badge/ligato/vpp--base-master-red.svg?logo=docker&logoColor=white&style=popout)][dockerhub] | [![master](https://img.shields.io/badge/packagecloud-fdio/master-37327b.svg?logo=debian)](https://packagecloud.io/fdio/master) | [![](https://images.microbadger.com/badges/image/ligato/vpp-base:master.svg)](https://microbadger.com/images/ligato/vpp-base:master) | 🚧 In Development (unstable) |
+|[![19.08](https://img.shields.io/badge/ligato/vpp--base-19.08-blue.svg?logo=docker&logoColor=white&style=popout)][dockerhub] | [![1908](https://img.shields.io/badge/packagecloud-fdio/1908-37327b.svg?logo=debian)](https://packagecloud.io/fdio/1908) | [![](https://images.microbadger.com/badges/image/ligato/vpp-base:19.08.svg)](https://microbadger.com/images/ligato/vpp-base:19.08) |  |
+|[![19.04](https://img.shields.io/badge/ligato/vpp--base-19.04-blue.svg?logo=docker&logoColor=white&style=popout)][dockerhub] | [![1904](https://img.shields.io/badge/packagecloud-fdio/1904-37327b.svg?logo=debian)](https://packagecloud.io/fdio/1904) | [![](https://images.microbadger.com/badges/image/ligato/vpp-base:19.04.svg)](https://microbadger.com/images/ligato/vpp-base:19.04) |  |
 
 The complete list of available image tags can be found on [DockerHub][dockerhub-tags].
 
 Images that contain:
-- unstable VPP version (master) is tagged with: `ligato/vpp-base:master`
-- stable VPP version are tagged using the particular release number: `ligato/vpp-base:YY.MM`
-- specific VPP versions are tagged using the complete version number: `ligato/vpp-base:YY.MM-rcX.N-gabcdefg` (e.g. `ligato/vpp-base:19.08-rc0.324-g2ecf18a55`)
-
+- unstable VPP version (master) is tagged with:
+  * `ligato/vpp-base:master`
+- stable VPP version are tagged using the particular release number: 
+  * `ligato/vpp-base:YY.MM`
+- specific VPP versions are tagged using the complete version number: 
+  * `ligato/vpp-base:YY.MM-rcX.N-gabcdefg` (e.g. `ligato/vpp-base:19.08-rc0.324-g2ecf18a55`)
+  
 #### Image Contents
 
 The vpp-base image contains the following pieces:
