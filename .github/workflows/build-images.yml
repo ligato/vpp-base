@@ -43,7 +43,7 @@ jobs:
         docker run --rm "$DOCKER_REPO:$TAG" dpkg-query -f '${Version}' -W vpp
 
     - name: "Publish image"
-      if: github.event_name != 'pull_request'
+#      if: github.event_name != 'pull_request'
       env:
         DOCKER_REPO: ligato/vpp-base
         REPO: ${{ matrix.repo }}
