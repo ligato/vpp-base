@@ -21,12 +21,14 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        tag: ['master', 'latest', '19.08', '19.04']
+        tag: ['master', 'latest', '20.01', '19.08', '19.04']
         include:
         - tag: 'master'
           repo: 'master'
         - tag: 'latest'
           repo: 'release'
+        - tag: '20.01'
+          repo: '2001'
         - tag: '19.08'
           repo: '1908'
         - tag: '19.04'
