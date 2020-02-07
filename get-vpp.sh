@@ -54,7 +54,7 @@ function get_vpp () {
 	echo "Finding packages with version: ${VPP_VERSION-}"
 	for package in ${packages}; do
 		# Filter packages with given version
-		pkg_info=$(apt-cache show ${package}) || {
+		pkg_info=$(apt-cache show -- ${package}) || {
 			die "apt-cache show on ${package} failed."
 		}
 		ver=$(echo ${pkg_info} | grep -o "Version: ${VPP_VERSION-}[^ ]*" | head -1) || true
