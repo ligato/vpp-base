@@ -46,6 +46,22 @@ To get docker image with latest VPP release:
 
 The vpp-base images are built continuously and published on DockerHub to [ligato/vpp-base][dockerhub].
 
+#### Image Tags
+
+Images tags that are updated periodically:
+- `ligato/vpp-base:latest`: latest official release
+- `ligato/vpp-base:master`: latest development version
+- `ligato/vpp-base:YY.MM`: latest stable versions
+
+All the published images are also tagged using their particular version:
+- `ligato/vpp-base:YY.MM-release`: official releases
+- `ligato/vpp-base:YY.MM-rc0.N-gabcdefg`: development versions
+- `ligato/vpp-base:YY.MM-rcX.N-gabcdefg`: release canditate versions
+- `ligato/vpp-base:YY.MM.X-N.gd28bac409`: stable versions
+
+
+> Note, that the tags do not contain `~` (replaced with `.`) as it is not allowed for docker images. The last part of version number containing builder version is also omitted.
+
 #### Available Versions
 
 Here's list of currently availables images:
@@ -59,11 +75,6 @@ Here's list of currently availables images:
 |[![19.04](https://img.shields.io/badge/ligato/vpp--base-19.04-blue.svg?logo=docker&logoColor=white&style=popout)][dockerhub] | [![1904](https://img.shields.io/badge/packagecloud-fdio/1904-37327b.svg?logo=debian)](https://packagecloud.io/fdio/1904) | [![](https://images.microbadger.com/badges/image/ligato/vpp-base:19.04.svg)](https://microbadger.com/images/ligato/vpp-base:19.04) |
 
 The complete list of available image tags can be found on [DockerHub][dockerhub-tags].
-
-Images that contain:
-- unstable VPP version (master) is tagged with: `ligato/vpp-base:master`
-- stable VPP version are tagged using the particular release number: `ligato/vpp-base:YY.MM`
-- specific VPP versions are tagged using the complete version number: `ligato/vpp-base:YY.MM-rcX.N-gabcdefg` (e.g. `ligato/vpp-base:19.08-rc0.324-g2ecf18a55`)
 
 #### Image Contents
 
