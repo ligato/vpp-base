@@ -48,17 +48,16 @@ The vpp-base images are built continuously and published on DockerHub to [ligato
 
 #### Image Tags
 
-Images tags that are updated periodically:
-- `ligato/vpp-base:latest`: latest official release
-- `ligato/vpp-base:master`: latest development version
-- `ligato/vpp-base:YY.MM`: latest stable versions
+Periodically updated images have fixed tags:
+- `ligato/vpp-base:latest` - latest official release
+- `ligato/vpp-base:master` - latest development version
+- `ligato/vpp-base:YY.MM`  - latest stable versions
 
 All the published images are also tagged using their particular version:
-- `ligato/vpp-base:YY.MM-release`: official releases
-- `ligato/vpp-base:YY.MM-rc0.N-gabcdefg`: development versions
-- `ligato/vpp-base:YY.MM-rcX.N-gabcdefg`: release canditate versions
-- `ligato/vpp-base:YY.MM.X-N.gd28bac409`: stable versions
-
+- `ligato/vpp-base:YY.MM-release` - official releases
+- `ligato/vpp-base:YY.MM-rc0.N-gabcdefg` - development versions
+- `ligato/vpp-base:YY.MM-rcX.N-gabcdefg` - release canditate versions
+- `ligato/vpp-base:YY.MM.X-N.gd28bac409` - stable versions
 
 > Note, that the tags do not contain `~` (replaced with `.`) as it is not allowed for docker images. The last part of version number containing builder version is also omitted.
 
