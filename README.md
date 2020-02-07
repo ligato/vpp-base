@@ -10,6 +10,12 @@
 
 ---
 
+Table of contents:
+- [Introduction](#introduction)
+- [Quickstart](#quickstart)
+- [Images](#images)
+- [Building Images](#building-images)
+
 ## Introduction
 
 The purpose of vpp-base is to provide docker images with installed VPP.
@@ -17,22 +23,23 @@ This is mainly because there are no official docker images provided by the FD.io
 
 #### Use Cases
 
-* use as a base image in other projects
+* use as a base image in Dockerfiles
+* build docker image for custom VPP build
 * quickly test something against specific VPP version
-* distribute Debian (_*.deb_) packages for VPP
-* generate VPP binary API from VPP API (_*.api.json_) files
+* distribute Debian packages for VPP
+* generate VPP binary API from API JSON files
 
 ## Quickstart
 
 To get docker image with latest VPP release:
 
 ```sh
-# get image with latest VPP release
-➢ docker pull ligato/vpp-base:latest
+# Get image with latest VPP release
+➢ docker pull ligato/vpp-base
 
-# print VPP version
+# Print exact VPP version in the image
 ➢ docker run --rm ligato/vpp-base cat /vpp/version
-19.08.1-release
+20.01-release
 ```
 
 ## Images
@@ -68,31 +75,30 @@ The vpp-base image contains the following pieces:
 - **Version file** that contains VPP version - `/vpp/version`
 
 ```sh
-# list files in /vpp/
-➤ docker run --rm -i ligato/vpp-base ls -gh
-total 93M
--rw-r--r-- 1 root 142K Sep 18 19:52 libvppinfra-dev_19.08.1-release_amd64.deb
--rw-r--r-- 1 root 166K Sep 18 19:52 libvppinfra_19.08.1-release_amd64.deb
--rw-r--r-- 1 root  22K Sep 18 19:52 python3-vpp-api_19.08.1-release_amd64.deb
--rw-r--r-- 1 root   16 Sep 19 00:05 version
--rw-r--r-- 1 root  22K Sep 18 19:52 vpp-api-python_19.08.1-release_amd64.deb
--rw-r--r-- 1 root  84M Sep 18 19:52 vpp-dbg_19.08.1-release_amd64.deb
--rw-r--r-- 1 root 896K Sep 18 19:52 vpp-dev_19.08.1-release_amd64.deb
--rw-r--r-- 1 root 2.7M Sep 18 19:52 vpp-plugin-core_19.08.1-release_amd64.deb
--rw-r--r-- 1 root 2.5M Sep 18 19:52 vpp-plugin-dpdk_19.08.1-release_amd64.deb
--rw-r--r-- 1 root 3.3M Sep 18 19:52 vpp_19.08.1-release_amd64.deb
+# List files in /vpp/ directory
+➤ docker run --rm ligato/vpp-base:latest ls -Sgh
+total 11M
+-rw-r--r-- 1 root 3.4M Jan 29 23:02 vpp_20.01-release_amd64.deb
+-rw-r--r-- 1 root 3.1M Jan 29 23:02 vpp-plugin-dpdk_20.01-release_amd64.deb
+-rw-r--r-- 1 root 3.0M Jan 29 23:02 vpp-plugin-core_20.01-release_amd64.deb
+-rw-r--r-- 1 root 941K Jan 29 23:02 vpp-dev_20.01-release_amd64.deb
+-rw-r--r-- 1 root 166K Jan 29 23:02 libvppinfra_20.01-release_amd64.deb
+-rw-r--r-- 1 root 132K Jan 29 23:02 libvppinfra-dev_20.01-release_amd64.deb
+-rw-r--r-- 1 root  24K Jan 29 23:02 python3-vpp-api_20.01-release_amd64.deb
+-rw-r--r-- 1 root  24K Jan 29 23:02 vpp-api-python_20.01-release_amd64.deb
+-rw-r--r-- 1 root   14 Feb  7 10:14 version
 
-# print installed VPP packages
+# Print installed VPP packages
 ➤ docker run --rm -i ligato/vpp-base dpkg-query -W '*vpp*'
-libvppinfra	19.08.1-release
-libvppinfra-dev	19.08.1-release
-python3-vpp-api	19.08.1-release
-vpp	19.08.1-release
-vpp-api-python	19.08.1-release
-vpp-dbg	19.08.1-release
-vpp-dev	19.08.1-release
-vpp-plugin-core	19.08.1-release
-vpp-plugin-dpdk	19.08.1-release
+libvppinfra	20.01-release
+libvppinfra-dev	20.01-release
+python3-vpp-api	20.01-release
+vpp	20.01-release
+vpp-api-python	20.01-release
+vpp-dbg	20.01-release
+vpp-dev	20.01-release
+vpp-plugin-core	20.01-release
+vpp-plugin-dpdk	20.01-release
 ```
 
 ## Building Images
@@ -105,8 +111,8 @@ To build vpp-base image you can simply use docker build command with without clo
 # latest VPP release
 ➢ docker build github.com/ligato/vpp-base
 
-# stable VPP 19.04
-➢ docker build --build-arg REPO='1904' github.com/ligato/vpp-base
+# stable VPP 20.01
+➢ docker build --build-arg REPO='2001' github.com/ligato/vpp-base
 
 # with specific VPP version
 ➢ docker build --build-arg REPO='master' --build-arg VPP_VERSION='19.08-rc0~196-g7fe470a54' github.com/ligato/vpp-base
