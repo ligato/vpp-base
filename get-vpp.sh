@@ -44,8 +44,7 @@ function get_vpp () {
 		# If version is not specified, find out the most recent version
 		VPP_VERSION=$(apt-cache -o Dir::Etc::SourceList=${apt_fdio_repo_file} \
 					  -o Dir::Etc::SourceParts=${apt_fdio_repo_file} \
-					  --no-all-versions show vpp | grep Version: | \
-					  cut -d " " -f 2) || {
+					  show vpp | grep Version: | cut -d " " -f 2 | grep -v "rc[1-9]" | head -1) || {
 						  die "Retrieval of most recent VPP version failed."
 					  }
 	fi
