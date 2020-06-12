@@ -41,13 +41,15 @@ function get_vpp () {
 				   die "Retrieval of available VPP packages failed."
 			   }
 	if [ -z "${VPP_VERSION-}" ]; then
-		# If version is not specified, find out the most recent version
-		VPP_VERSION=$(apt-cache -o Dir::Etc::SourceList=${apt_fdio_repo_file} \
+		allVersions=$(apt-cache -o Dir::Etc::SourceList=${apt_fdio_repo_file} \
 					  -o Dir::Etc::SourceParts=${apt_fdio_repo_file} \
-					  --no-all-versions show vpp | grep Version: | \
-					  cut -d " " -f 2) || {
-						  die "Retrieval of most recent VPP version failed."
+					  show vpp | grep Version: | cut -d " " -f 2) || {
+						  die "Retrieval of available VPP versions failed."
 					  }
+		if [ "${REPO}" != "master" ]; then
+			allVersions=$(echo "$allVersions" | grep -v "\-rc[0-9]")
+		fi
+		VPP_VERSION=$(echo "$allVersions" | head -n1)
 	fi
 
 	set +x
