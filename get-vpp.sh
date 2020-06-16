@@ -1,6 +1,6 @@
 #!/bin/bash
 
-[ -z "$REPO_URL" ] && REPO_URL="https://packagecloud.io/install/repositories/fdio/${REPO:=release}
+[ -z "$REPO_URL" ] && REPO_URL="https://packagecloud.io/install/repositories/fdio/${REPO:=release}"
 
 # the code below comes from FDio's CSIT project.
 function get_vpp () {
