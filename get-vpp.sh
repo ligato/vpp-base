@@ -1,6 +1,6 @@
 #!/bin/bash
 
-; ${REPO:=release}
+REPO=${REPO:=release}
 
 [ -z "$REPO_URL" ] && REPO_URL="https://packagecloud.io/install/repositories/fdio/${REPO}"
 
