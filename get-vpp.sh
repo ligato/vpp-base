@@ -1,6 +1,8 @@
 #!/bin/bash
 
-[ -z "$REPO_URL" ] && REPO_URL="https://packagecloud.io/install/repositories/fdio/${REPO:-release}"
+; ${REPO:=release}
+
+[ -z "$REPO_URL" ] && REPO_URL="https://packagecloud.io/install/repositories/fdio/${REPO}"
 
 # the code below comes from FDio's CSIT project.
 function get_vpp () {
@@ -14,6 +16,7 @@ function get_vpp () {
 	ls "*.deb" 2>/dev/null && { die "remove existing *.deb files"; }
 
 	set -exuo pipefail
+	trap '' PIPE
 
 	curl -sS "${REPO_URL}"/script.deb.sh | bash || {
 		die "Packagecloud FD.io repo fetch failed."
