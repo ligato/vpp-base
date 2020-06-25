@@ -38,6 +38,7 @@ Use cases:
 ### Latest VPP release
 
 ```sh
+# Pull the image
 ➢ docker pull ligato/vpp-base
 
 # Print the VPP version
@@ -48,8 +49,10 @@ Use cases:
 ### Recent development version of VPP
 
 ```sh
+# Pull the image
 ➢ docker pull ligato/vpp-base:master
 
+# Print the VPP version
 ➢ docker run --rm ligato/vpp-base:master cat /vpp/version
 20.09-rc0~157-g8eca60df7~b1410
 ```
