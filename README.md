@@ -33,6 +33,27 @@ Use cases:
 * Generate VPP binary API bindings
 * Distribute Debian packages for VPP
 
+## Quickstart
+
+### Latest VPP release
+
+```sh
+➢ docker pull ligato/vpp-base
+
+# Print the VPP version
+➢ docker run --rm ligato/vpp-base cat /vpp/version
+20.05-release
+```
+
+### Recent development version of VPP
+
+```sh
+➢ docker pull ligato/vpp-base:master
+
+➢ docker run --rm ligato/vpp-base:master cat /vpp/version
+20.09-rc0~157-g8eca60df7~b1410
+```
+
 ## Available Versions
 
 List of currently availables versions:
@@ -46,30 +67,6 @@ List of currently availables versions:
 |[![19.08](https://img.shields.io/badge/ligato/vpp--base-19.08-blue.svg?logo=docker&logoColor=white&style=popout)](https://hub.docker.com/r/ligato/vpp-base/tags?name=19.08) | [![1908](https://img.shields.io/badge/fdio-1908-37327b.svg?logo=debian)](https://packagecloud.io/fdio/1908) | [![master](https://img.shields.io/docker/v/ligato/vpp-base/19.08.svg)](https://img.shields.io/docker/v/ligato/vpp-base/19.08.svg) | [![size](https://img.shields.io/docker/image-size/ligato/vpp-base/19.08)](https://microbadger.com/images/ligato/vpp-base:19.08) |
 
 The complete list of available image tags can be found on [DockerHub][dockerhub-tags].
-
-## Quickstart
-
-Use image with latest released version of VPP:
-
-```sh
-# Pull the image
-➢ docker pull ligato/vpp-base
-
-# Print the VPP version
-➢ docker run --rm ligato/vpp-base cat /vpp/version
-20.05-release
-```
-
-Use image with recent development version of VPP (master branch):
-
-```sh
-# Pull the image
-➢ docker pull ligato/vpp-base:master
-
-# Print the VPP version
-➢ docker run --rm ligato/vpp-base:master cat /vpp/version
-20.09-rc0~157-g8eca60df7~b1410
-```
 
 ## Build Image
 
