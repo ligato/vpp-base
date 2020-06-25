@@ -12,8 +12,8 @@
 
 Table of contents:
 - [Intro](#intro)
-- [Quickstart](#quickstart)
 - [Available Versions](#available-versions)
+- [Quickstart](#quickstart)
 - [Build Image](#build-image)
   - [Official VPP version](#build-with-official-vpp-version)
   - [Custom VPP version](#build-with-custom-vpp-version)
@@ -24,7 +24,6 @@ Table of contents:
 ## Intro
 
 The purpose of vpp-base is to provide tools for building docker images with any version of VPP.
-The project was created because there are no official docker images provided by the FD.io community.
 
 Use cases:
 * Use as a base image in your Dockerfiles
@@ -33,33 +32,11 @@ Use cases:
 * Generate VPP binary API bindings
 * Distribute Debian packages for VPP
 
-## Quickstart
-
-### Latest VPP release
-
-```sh
-# Pull the image
-➢ docker pull ligato/vpp-base
-
-# Print the VPP version
-➢ docker run --rm ligato/vpp-base cat /vpp/version
-20.05-release
-```
-
-### Recent development version of VPP
-
-```sh
-# Pull the image
-➢ docker pull ligato/vpp-base:master
-
-# Print the VPP version
-➢ docker run --rm ligato/vpp-base:master cat /vpp/version
-20.09-rc0~157-g8eca60df7~b1410
-```
+The project was created because there are no official docker images provided by the FD.io community.
 
 ## Available Versions
 
-List of currently availables versions:
+List of currently availables versions that are being built and published:
 
 | Docker Image | Packagecloud Repo | Current Version | Image Details |
 |---|---|---|---|
@@ -70,6 +47,30 @@ List of currently availables versions:
 |[![19.08](https://img.shields.io/badge/ligato/vpp--base-19.08-blue.svg?logo=docker&logoColor=white&style=popout)](https://hub.docker.com/r/ligato/vpp-base/tags?name=19.08) | [![1908](https://img.shields.io/badge/fdio-1908-37327b.svg?logo=debian)](https://packagecloud.io/fdio/1908) | [![master](https://img.shields.io/docker/v/ligato/vpp-base/19.08.svg)](https://img.shields.io/docker/v/ligato/vpp-base/19.08.svg) | [![size](https://img.shields.io/docker/image-size/ligato/vpp-base/19.08)](https://microbadger.com/images/ligato/vpp-base:19.08) |
 
 The complete list of available image tags can be found on [DockerHub][dockerhub-tags].
+
+## Quickstart
+
+### Using latest VPP release
+
+```sh
+# Pull the image
+➢ docker pull ligato/vpp-base
+
+# Print the VPP version
+➢ docker run --rm ligato/vpp-base cat /vpp/version
+20.05-release
+```
+
+### Using recent development version of VPP
+
+```sh
+# Pull the image
+➢ docker pull ligato/vpp-base:master
+
+# Print the VPP version
+➢ docker run --rm ligato/vpp-base:master cat /vpp/version
+20.09-rc0~157-g8eca60df7~b1410
+```
 
 ## Build Image
 
