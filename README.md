@@ -11,15 +11,31 @@
 ---
 
 Table of contents:
-- [Intro](#intro)
 - [Available Versions](#available-versions)
+- [Intro](#intro)
 - [Quickstart](#quickstart)
+  - [Use latest release of VPP](#use-latest-release-of-vpp)
+  - [Use development version of VPP](#use-development-version-of-vpp)
 - [Build Image](#build-image)
   - [Official VPP version](#build-with-official-vpp-version)
   - [Custom VPP version](#build-with-custom-vpp-version)
 - [Images](#images)
-  - [Tag Format](#tag-format)
   - [Image Contents](#image-contents)
+  - [Tag Format](#tag-format)
+
+## Available Versions
+
+List of currently availables versions that are being maintained:
+
+| Docker Image | Packagecloud Repo | Version | Details |
+|---|---|---|---|
+|[![master](https://img.shields.io/badge/ligato/vpp--base-master-salmon.svg?logo=docker&logoColor=white&style=popout)](https://hub.docker.com/r/ligato/vpp-base/tags?name=master) | [![master](https://img.shields.io/badge/fdio-master-salmon.svg?logo=debian)](https://packagecloud.io/fdio/master) | [![master](https://img.shields.io/docker/v/ligato/vpp-base/master.svg?color=salmon)](https://img.shields.io/docker/v/ligato/vpp-base/master.svg) | [![size](https://img.shields.io/docker/image-size/ligato/vpp-base/master)](https://microbadger.com/images/ligato/vpp-base:master) |
+|[![latest](https://img.shields.io/badge/ligato/vpp--base-latest-brightgreen.svg?logo=docker&logoColor=white&style=popout)](https://hub.docker.com/r/ligato/vpp-base/tags?name=latest) | [![release](https://img.shields.io/badge/fdio-release-brightgreen.svg?logo=debian)](https://packagecloud.io/fdio/release) | [![master](https://img.shields.io/docker/v/ligato/vpp-base/latest.svg?color=brightgreen)](https://img.shields.io/docker/v/ligato/vpp-base/latest.svg) | [![size](https://img.shields.io/docker/image-size/ligato/vpp-base/latest)](https://microbadger.com/images/ligato/vpp-base:latest) |
+|[![20.05](https://img.shields.io/badge/ligato/vpp--base-20.05-blue.svg?logo=docker&logoColor=white&style=popout)](https://hub.docker.com/r/ligato/vpp-base/tags?name=20.05) | [![2005](https://img.shields.io/badge/fdio-2005-37327b.svg?logo=debian)](https://packagecloud.io/fdio/2005) | [![master](https://img.shields.io/docker/v/ligato/vpp-base/20.05.svg)](https://img.shields.io/docker/v/ligato/vpp-base/20.05.svg) | [![size](https://img.shields.io/docker/image-size/ligato/vpp-base/20.05)](https://microbadger.com/images/ligato/vpp-base:20.05) |
+|[![20.01](https://img.shields.io/badge/ligato/vpp--base-20.01-blue.svg?logo=docker&logoColor=white&style=popout)](https://hub.docker.com/r/ligato/vpp-base/tags?name=20.01) | [![2001](https://img.shields.io/badge/fdio-2001-37327b.svg?logo=debian)](https://packagecloud.io/fdio/2001) | [![master](https://img.shields.io/docker/v/ligato/vpp-base/20.01.svg)](https://img.shields.io/docker/v/ligato/vpp-base/20.01.svg) | [![size](https://img.shields.io/docker/image-size/ligato/vpp-base/20.01)](https://microbadger.com/images/ligato/vpp-base:20.01) |
+|[![19.08](https://img.shields.io/badge/ligato/vpp--base-19.08-blue.svg?logo=docker&logoColor=white&style=popout)](https://hub.docker.com/r/ligato/vpp-base/tags?name=19.08) | [![1908](https://img.shields.io/badge/fdio-1908-37327b.svg?logo=debian)](https://packagecloud.io/fdio/1908) | [![master](https://img.shields.io/docker/v/ligato/vpp-base/19.08.svg)](https://img.shields.io/docker/v/ligato/vpp-base/19.08.svg) | [![size](https://img.shields.io/docker/image-size/ligato/vpp-base/19.08)](https://microbadger.com/images/ligato/vpp-base:19.08) |
+
+The complete list of available image tags can be found on [DockerHub][dockerhub-tags].
 
 ## Intro
 
@@ -34,23 +50,9 @@ Use cases:
 
 The project was created because there are no official docker images provided by the FD.io community.
 
-## Available Versions
-
-List of currently availables versions that are being built and published:
-
-| Docker Image | Packagecloud Repo | Current Version | Image Details |
-|---|---|---|---|
-|[![master](https://img.shields.io/badge/ligato/vpp--base-master-salmon.svg?logo=docker&logoColor=white&style=popout)](https://hub.docker.com/r/ligato/vpp-base/tags?name=master) | [![master](https://img.shields.io/badge/fdio-master-salmon.svg?logo=debian)](https://packagecloud.io/fdio/master) | [![master](https://img.shields.io/docker/v/ligato/vpp-base/master.svg?color=salmon)](https://img.shields.io/docker/v/ligato/vpp-base/master.svg) | [![size](https://img.shields.io/docker/image-size/ligato/vpp-base/master)](https://microbadger.com/images/ligato/vpp-base:master) |
-|[![latest](https://img.shields.io/badge/ligato/vpp--base-latest-brightgreen.svg?logo=docker&logoColor=white&style=popout)](https://hub.docker.com/r/ligato/vpp-base/tags?name=latest) | [![release](https://img.shields.io/badge/fdio-release-brightgreen.svg?logo=debian)](https://packagecloud.io/fdio/release) | [![master](https://img.shields.io/docker/v/ligato/vpp-base/latest.svg?color=brightgreen)](https://img.shields.io/docker/v/ligato/vpp-base/latest.svg) | [![size](https://img.shields.io/docker/image-size/ligato/vpp-base/latest)](https://microbadger.com/images/ligato/vpp-base:latest) |
-|[![20.05](https://img.shields.io/badge/ligato/vpp--base-20.05-blue.svg?logo=docker&logoColor=white&style=popout)](https://hub.docker.com/r/ligato/vpp-base/tags?name=20.05) | [![2005](https://img.shields.io/badge/fdio-2005-37327b.svg?logo=debian)](https://packagecloud.io/fdio/2005) | [![master](https://img.shields.io/docker/v/ligato/vpp-base/20.05.svg)](https://img.shields.io/docker/v/ligato/vpp-base/20.05.svg) | [![size](https://img.shields.io/docker/image-size/ligato/vpp-base/20.05)](https://microbadger.com/images/ligato/vpp-base:20.05) |
-|[![20.01](https://img.shields.io/badge/ligato/vpp--base-20.01-blue.svg?logo=docker&logoColor=white&style=popout)](https://hub.docker.com/r/ligato/vpp-base/tags?name=20.01) | [![2001](https://img.shields.io/badge/fdio-2001-37327b.svg?logo=debian)](https://packagecloud.io/fdio/2001) | [![master](https://img.shields.io/docker/v/ligato/vpp-base/20.01.svg)](https://img.shields.io/docker/v/ligato/vpp-base/20.01.svg) | [![size](https://img.shields.io/docker/image-size/ligato/vpp-base/20.01)](https://microbadger.com/images/ligato/vpp-base:20.01) |
-|[![19.08](https://img.shields.io/badge/ligato/vpp--base-19.08-blue.svg?logo=docker&logoColor=white&style=popout)](https://hub.docker.com/r/ligato/vpp-base/tags?name=19.08) | [![1908](https://img.shields.io/badge/fdio-1908-37327b.svg?logo=debian)](https://packagecloud.io/fdio/1908) | [![master](https://img.shields.io/docker/v/ligato/vpp-base/19.08.svg)](https://img.shields.io/docker/v/ligato/vpp-base/19.08.svg) | [![size](https://img.shields.io/docker/image-size/ligato/vpp-base/19.08)](https://microbadger.com/images/ligato/vpp-base:19.08) |
-
-The complete list of available image tags can be found on [DockerHub][dockerhub-tags].
-
 ## Quickstart
 
-### Using latest VPP release
+### Use latest release of VPP
 
 ```sh
 # Pull the image
@@ -61,7 +63,7 @@ The complete list of available image tags can be found on [DockerHub][dockerhub-
 20.05-release
 ```
 
-### Using recent development version of VPP
+### Use development version of VPP
 
 ```sh
 # Pull the image
@@ -117,23 +119,6 @@ docker build --tag vpp-base:custom ./custom
 
 The vpp-base images are built continuously by GitHub [workflow](.github/workflows/build-images.yml) and published to DockerHub repository [ligato/vpp-base][dockerhub].
 
-### Tag Format
-
-Tags are derived from particular VPP version installed in the image. However they are some differences between image tag and particular VPP version:
-- character `~` is replaced  with _dot_ `.` (not allowed in docker image tags)
-- build number suffix (`~bXXXX`) is omitted in tags
-
-Periodically updated images have fixed tags:
-- `ligato/vpp-base:latest` - latest official release
-- `ligato/vpp-base:master` - latest development version
-- `ligato/vpp-base:YY.MM`  - latest stable versions
-
-All the published images are also tagged using their particular version:
-- `ligato/vpp-base:YY.MM-release` - official releases
-- `ligato/vpp-base:YY.MM-rc0.N-gabcdefg` - development versions
-- `ligato/vpp-base:YY.MM-rcX.N-gabcdefg` - release canditate versions
-- `ligato/vpp-base:YY.MM.X-N.gd28bac409` - stable versions
-
 ### Image Contents
 
 The vpp-base image contains the following pieces:
@@ -169,6 +154,24 @@ vpp-dev	20.01-release
 vpp-plugin-core	20.01-release
 vpp-plugin-dpdk	20.01-release
 ```
+
+### Tag Format
+
+Tags are derived from particular VPP version installed in the image. However they are some differences between image tag and particular VPP version:
+- character `~` is replaced  with _dot_ `.` (not allowed in docker image tags)
+- build number suffix (`~bXXXX`) is omitted in tags
+
+Periodically updated images have fixed tags:
+- `ligato/vpp-base:latest` - latest official release
+- `ligato/vpp-base:master` - latest development version
+- `ligato/vpp-base:YY.MM`  - latest stable versions
+
+All the published images are also tagged using their particular version:
+- `ligato/vpp-base:YY.MM-release` - official releases
+- `ligato/vpp-base:YY.MM-rc0.N-gabcdefg` - development versions
+- `ligato/vpp-base:YY.MM-rcX.N-gabcdefg` - release canditate versions
+- `ligato/vpp-base:YY.MM.X-N.gd28bac409` - stable versions
+
 
 <!-- LINKS -->
 [dockerhub]: https://hub.docker.com/r/ligato/vpp-base
