@@ -78,27 +78,25 @@ The project was created because there are no official docker images provided by 
 
 ### Build with official VPP version
 
-To build vpp-base image you can simply use docker build command with without cloning this git repository:
+To build vpp-base image you can simply use `docker build` command (no need to clone this repository at all):
 
 ```sh
-# latest VPP release
+# Build with latest VPP release
 ➢ docker build github.com/ligato/vpp-base
 
-# stable VPP 20.01
-➢ docker build --build-arg REPO='2001' github.com/ligato/vpp-base
+# Build with stable VPP 20.05
+➢ docker build --build-arg REPO='2005' github.com/ligato/vpp-base
 
-# with specific VPP version
-➢ docker build --build-arg REPO='master' --build-arg VPP_VERSION='19.08-rc0~196-g7fe470a54' github.com/ligato/vpp-base
+# Build with exact VPP version
+➢ docker build --build-arg REPO='master' --build-arg VPP_VERSION='20.09-rc0~174-gbfeae8c57' github.com/ligato/vpp-base
 
-# with specific VPP commit
-➢ docker build --build-arg REPO='master' --build-arg VPP_VERSION='19.08[^ ]*-g7fe470a54' github.com/ligato/vpp-base
+# Build with specific VPP commit
+➢ docker build --build-arg REPO='master' --build-arg VPP_VERSION='20.09-rc0~[^ ]*-g<commit>' github.com/ligato/vpp-base
 ```
 
 ### Build with custom VPP version
 
-To build vpp-base with custom VPP which installs from local debian packages you can use the [custom](custom/Dockerfile) which adds .deb packages from custom directory and installs them.
-
-NOTE: The VPP repository can be cloned into `vpp` directory at the root of this repo (will be ignored by git).
+To build vpp-base with custom VPP you can use the [custom](custom/Dockerfile) which installs from local debian packages by adding .deb packages from custom directory and installing them.
 
 ```sh
 # build VPP
@@ -114,6 +112,8 @@ cp ./vpp/build-root/*.deb ./custom/
 # build custom vpp-base image
 docker build --tag vpp-base:custom ./custom
 ```
+
+NOTE: You can put VPP repo into `vpp` directory at the root of this repo and it will be ignored by git.
 
 ## Images
 
