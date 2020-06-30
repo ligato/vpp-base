@@ -50,7 +50,7 @@ function get_vpp () {
 		if [ "${REPO}" != "master" ]; then
 			allVersions=$(echo "$allVersions" | grep -v "\-rc[0-9]")
 		fi
-		VPP_VERSION=$(echo "$allVersions" | head -n1)
+		VPP_VERSION=$(echo "$allVersions" | head -n1) || true
 	fi
 
 	set +x
