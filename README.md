@@ -27,7 +27,7 @@ Table of contents:
 
 List of currently availables versions that are being maintained:
 
-| Docker Image | Packagecloud Repo | Version | Details |
+| Image Tag | Packagecloud Repo | Version | Details |
 |---|---|---|---|
 |[![master](https://img.shields.io/badge/ligato/vpp--base-master-salmon.svg?logo=docker&logoColor=white&style=popout)](https://hub.docker.com/r/ligato/vpp-base/tags?name=master) | [![master](https://img.shields.io/badge/fdio-master-salmon.svg?logo=debian)](https://packagecloud.io/fdio/master) | [![master](https://img.shields.io/docker/v/ligato/vpp-base/master.svg?color=salmon)](https://img.shields.io/docker/v/ligato/vpp-base/master.svg) | [![size](https://img.shields.io/docker/image-size/ligato/vpp-base/master)](https://microbadger.com/images/ligato/vpp-base:master) |
 |[![latest](https://img.shields.io/badge/ligato/vpp--base-latest-brightgreen.svg?logo=docker&logoColor=white&style=popout)](https://hub.docker.com/r/ligato/vpp-base/tags?name=latest) | [![release](https://img.shields.io/badge/fdio-release-brightgreen.svg?logo=debian)](https://packagecloud.io/fdio/release) | [![master](https://img.shields.io/docker/v/ligato/vpp-base/latest.svg?color=brightgreen)](https://img.shields.io/docker/v/ligato/vpp-base/latest.svg) | [![size](https://img.shields.io/docker/image-size/ligato/vpp-base/latest)](https://microbadger.com/images/ligato/vpp-base:latest) |
