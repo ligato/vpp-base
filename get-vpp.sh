@@ -48,7 +48,8 @@ function get_vpp () {
 						  die "Retrieval of available VPP versions failed."
 					  }
 		if [ "${REPO}" != "master" ]; then
-			allVersions=$(echo "$allVersions" | grep -v "\-rc[0-9]")
+			nonRcVersions=$(echo "$allVersions" | grep -v "\-rc[0-9]")
+			[ -n "${nonRcVersions}" ] && allVersions=$nonRcVersions
 		fi
 		VPP_VERSION=$(echo "$allVersions" | head -n1) || true
 	fi
