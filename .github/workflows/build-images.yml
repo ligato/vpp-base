@@ -21,7 +21,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        tag: ['master', 'latest', '22.02', '21.10', '21.06', '21.01', '20.09', '20.05']
+        tag: ['master', 'latest', '22.02', '21.10', '21.06', '21.01']
         include:
         - tag: 'master'
           repo: 'master'
@@ -35,10 +35,6 @@ jobs:
           repo: '2106'
         - tag: '21.01'
           repo: '2101'
-        - tag: '20.09'
-          repo: '2009'
-        - tag: '20.05'
-          repo: '2005'
     
     steps:
     - name: "Checkout"
