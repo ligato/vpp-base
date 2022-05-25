@@ -44,6 +44,7 @@ jobs:
 
     - name: "Build image"
       run: |
+        env | sort
         docker build --build-arg REPO="$REPO" --tag "$DOCKER_REPO:$TAG" .
         docker run --rm "$DOCKER_REPO:$TAG" dpkg-query -f '${Version}' -W vpp
 
