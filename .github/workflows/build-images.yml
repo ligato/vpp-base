@@ -50,6 +50,7 @@ jobs:
     - name: "Publish image"
       if: github.event_name != 'pull_request'
       run: |
+        env | sort
         export VPP_VERSION=$(docker run --rm "$DOCKER_REPO:$TAG" cat /vpp/version | cut -d'~' -f1,2 | sed -e 's/~/./g')
         docker tag "$DOCKER_REPO:$TAG" "$DOCKER_REPO:$VPP_VERSION"
         docker images "$DOCKER_REPO"
