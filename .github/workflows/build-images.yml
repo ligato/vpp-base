@@ -46,6 +46,7 @@ jobs:
 
     - name: "Build image"
       run: |
+        env | sort
         docker build --build-arg REPO="$REPO" --tag "$DOCKER_REPO:$TAG" .
         docker run --rm "$DOCKER_REPO:$TAG" dpkg-query -f '${Version}' -W vpp
 
@@ -55,7 +56,7 @@ jobs:
         export VPP_VERSION=$(docker run --rm "$DOCKER_REPO:$TAG" cat /vpp/version | cut -d'~' -f1,2 | sed -e 's/~/./g')
         docker tag "$DOCKER_REPO:$TAG" "$DOCKER_REPO:$VPP_VERSION"
         docker images "$DOCKER_REPO"
-        if curl -sSflL "https://index.docker.io/v1/repositories/$DOCKER_REPO/tags/$VPP_VERSION" >/dev/null; then
+        if [ $GITHUB_EVENT_NAME == "schedule" ] && curl -sSflL "https://index.docker.io/v1/repositories/$DOCKER_REPO/tags/$VPP_VERSION" >/dev/null; then
           echo "Image $DOCKER_REPO:$VPP_VERSION has already been published."
         else
           docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
