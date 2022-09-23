@@ -23,12 +23,14 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        tag: ['master', 'latest', '22.06', '22.02', '21.10', '21.06', '21.01']
+        tag: ['master', 'latest', '22.10', '22.06', '22.02', '21.10', '21.06']
         include:
         - tag: 'master'
           repo: 'master'
         - tag: 'latest'
           repo: 'release'
+        - tag: '22.10'
+          repo: '2210'
         - tag: '22.06'
           repo: '2206'
         - tag: '22.02'
@@ -37,8 +39,6 @@ jobs:
           repo: '2110'
         - tag: '21.06'
           repo: '2106'
-        - tag: '21.01'
-          repo: '2101'
     
     steps:
     - name: "Checkout"
