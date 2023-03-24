@@ -1,4 +1,4 @@
-name: Build Images
+name: Build Images (Docker Hub)
 
 on:
   pull_request:
